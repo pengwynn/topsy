@@ -1,6 +1,6 @@
 # Topsy
 
-Simple Ruby wrapper for the [Topsy.com](http://topsy.com) Otter API.
+Simple Ruby wrapper for the [Topsy.com](http://topsy.com) Otter API. Topsy is a search engine powered by tweets.
 
 ## Installation
 
@@ -31,4 +31,4 @@ Check the [full gem documentation](http://yardoc.org/docs/pengwynn-topsy) and [A
 
 ## Copyright
 
-Copyright (c) 2010 Wynn Netherland. See LICENSE for details.
+Copyright (c) 2010 [Wynn Netherland](http://wynnnetherland.com). See LICENSE for details.
