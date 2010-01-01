@@ -1,0 +1,23 @@
+{
+    "request": {
+        "response_type": "json",
+        "resource": "profilesearch",
+        "parameters": {
+            "q": "pengwynn"
+        },
+        "url": "http://button.topsy.com/profilesearch.json?q=pengwynn"
+    },
+    "response": {
+        "page": 1,
+        "total": 1,
+        "perpage": 10,
+        "list": [{
+            "name": "Wynn Netherland",
+            "photo_url": "http://a1.twimg.com/profile_images/485575482/komikazee_normal.png",
+            "description": "Christian husband and father, Ruby developer and web designer. Co-founder of TweetCongress.org and Squeejee, makers of Good clean fun!™",
+            "influence_level": 10,
+            "url": "http://twitter.com/pengwynn",
+            "topsy_author_url": "http://topsy.com/twitter/pengwynn"
+        }]
+    }
+}

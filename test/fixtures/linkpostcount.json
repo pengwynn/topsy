@@ -1,0 +1,14 @@
+{
+    "request": {
+        "response_type": "json",
+        "resource": "linkpostcount",
+        "parameters": {
+            "url": "http://twitter.com/pengwynn"
+        },
+        "url": "http://button.topsy.com/linkpostcount.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn"
+    },
+    "response": {
+        "all": 1004,
+        "contains": 0
+    }
+}

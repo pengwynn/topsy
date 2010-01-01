@@ -1,0 +1,16 @@
+{
+    "request": {
+        "response_type": "json",
+        "resource": "stats",
+        "parameters": {
+            "url": "http://github.com/pengwynn/linkedin"
+        },
+        "url": "http://button.topsy.com/stats.json?url=http%3A%2F%2Fgithub.com%2Fpengwynn%2Flinkedin"
+    },
+    "response": {
+        "influential": 3,
+        "all": 11,
+        "contains": 0,
+        "topsy_trackback_url": "http://topsy.com/tb/github.com/pengwynn/linkedin"
+    }
+}

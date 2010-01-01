@@ -5,13 +5,19 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "topsy"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "wynn@squeejee.com"
+    gem.summary = %Q{Ruby wrapper for the Topsy otterapi}
+    gem.description = %Q{Ruby wrapper for the Topsy otterapi}
+    gem.email = "wynn.netherland@gmail.com"
     gem.homepage = "http://github.com/pengwynn/topsy"
     gem.authors = ["Wynn Netherland"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    
+    gem.add_dependency('hashie', '~> 0.1.3')
+    gem.add_dependency('httparty', '~> 0.4.5')
+
+    gem.add_development_dependency('thoughtbot-shoulda', '>= 2.10.1')
+    gem.add_development_dependency('jnunemaker-matchy', '0.4.0')
+    gem.add_development_dependency('mocha', '0.9.4')
+    gem.add_development_dependency('fakeweb', '>= 1.2.5')
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
@@ -42,12 +48,3 @@ task :test => :check_dependencies
 
 task :default => :test
 
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "topsy #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end

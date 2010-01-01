@@ -1,0 +1,51 @@
+{
+    "request": {
+        "response_type": "json",
+        "resource": "tags",
+        "parameters": {
+            "url": "http://gemcutter.org"
+        },
+        "url": "http://button.topsy.com/tags.json?url=http%3A%2F%2Fgemcutter.org"
+    },
+    "response": {
+        "page": 1,
+        "total": 9,
+        "perpage": 10,
+        "list": [{
+            "name": "itunesu",
+            "url": "http://topsy.com/s?q=itunesu"
+        },
+        {
+            "name": "projectsprouts",
+            "url": "http://topsy.com/s?q=projectsprouts"
+        },
+        {
+            "name": "gemcutter",
+            "url": "http://topsy.com/s?q=gemcutter"
+        },
+        {
+            "name": "rails",
+            "url": "http://topsy.com/s?q=rails"
+        },
+        {
+            "name": "ruby",
+            "url": "http://topsy.com/s?q=ruby"
+        },
+        {
+            "name": "gems",
+            "url": "http://topsy.com/s?q=gems"
+        },
+        {
+            "name": "gem",
+            "url": "http://topsy.com/s?q=gem"
+        },
+        {
+            "name": "fail",
+            "url": "http://topsy.com/s?q=fail"
+        },
+        {
+            "name": "jruby",
+            "url": "http://topsy.com/s?q=jruby"
+        }]
+    }
+}

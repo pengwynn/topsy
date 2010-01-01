@@ -1,0 +1,165 @@
+{
+    "request": {
+        "response_type": "json",
+        "resource": "authorsearch",
+        "parameters": {
+            "q": "pengwynn"
+        },
+        "url": "http://button.topsy.com/authorsearch.json?q=pengwynn"
+    },
+    "response": {
+        "page": 1,
+        "total": 491,
+        "perpage": 15,
+        "list": [{
+            "name": "Bradley Joyce",
+            "nick": "bradleyjoyce",
+            "photo_url": "http://a3.twimg.com/profile_images/421303551/bradley_normal.png",
+            "description": "Entrepreneur and Web Developer -- TweetAbout.com, TickStart.com, TweetCongress.org, Floxee.org, Sherflock.com, Squeejee.com",
+            "influence_level": "7",
+            "hits": 47,
+            "url": "http://twitter.com/bradleyjoyce",
+            "topsy_author_url": "http://topsy.com/twitter/bradleyjoyce"
+        },
+        {
+            "name": "tweetcongress",
+            "nick": "tweetcongress",
+            "photo_url": "http://s.twimg.com/a/1253209888/images/default_profile_0_normal.png",
+            "description": "Grassroots effort to get Congress tweeting!",
+            "influence_level": "10",
+            "hits": 13,
+            "url": "http://twitter.com/tweetcongress",
+            "topsy_author_url": "http://topsy.com/twitter/tweetcongress"
+        },
+        {
+            "name": "Jim Mulholland",
+            "nick": "mully",
+            "photo_url": "http://a3.twimg.com/profile_images/385459831/twitterProfilePhoto_normal.jpg",
+            "description": "Partner at Squeejee, a Ruby / Rails consultancy; Co-Creator of TweetCongress; Husband and father of 3; ",
+            "influence_level": "4",
+            "hits": 19,
+            "url": "http://twitter.com/mully",
+            "topsy_author_url": "http://topsy.com/twitter/mully"
+        },
+        {
+            "name": "Chris McCroskey",
+            "nick": "curvezilla",
+            "photo_url": "http://a1.twimg.com/profile_images/413047412/chrisheadshot_normal.jpg",
+            "description": "Mission Control at Squeejee and Co-Founder of TweetCongress.org &amp; Founder of Heroes4Heroes a charity that sends care packets to the troops. Proud Razorback!",
+            "influence_level": "4",
+            "hits": 16,
+            "url": "http://twitter.com/curvezilla",
+            "topsy_author_url": "http://topsy.com/twitter/curvezilla"
+        },
+        {
+            "name": "Steve Lunceford",
+            "nick": "dslunceford",
+            "photo_url": "http://a3.twimg.com/profile_images/420259957/headshot_tight_normal.JPG",
+            "description": "20-year media and PR pro focusing on Government; TiVo, Home Theater & general gadget fanatic. Creator of http://GovTwit.com",
+            "influence_level": "10",
+            "hits": 11,
+            "url": "http://twitter.com/dslunceford",
+            "topsy_author_url": "http://topsy.com/twitter/dslunceford"
+        },
+        {
+            "name": "Damon Clinkscales",
+            "nick": "damon",
+            "photo_url": "http://a1.twimg.com/profile_images/561257818/mo5_crop_normal.jpg",
+            "description": "I'm a shepherd. Software engineer at VitalSource and leader of Austin On Rails. I also build apps like http://snaptweet.com and http://doesfollow.com. ",
+            "influence_level": "10",
+            "hits": 8,
+            "url": "http://twitter.com/damon",
+            "topsy_author_url": "http://topsy.com/twitter/damon"
+        },
+        {
+            "name": "Wynn Netherland",
+            "nick": "pengwynn",
+            "photo_url": "http://a1.twimg.com/profile_images/485575482/komikazee_normal.png",
+            "description": "Christian husband and father, Ruby developer and web designer. Co-founder of TweetCongress.org and Squeejee, makers of Good clean fun!™",
+            "influence_level": "10",
+            "hits": 8,
+            "url": "http://twitter.com/pengwynn",
+            "topsy_author_url": "http://topsy.com/twitter/pengwynn"
+        },
+        {
+            "name": "Luigi Montanez",
+            "nick": "luigimontanez",
+            "photo_url": "http://a3.twimg.com/profile_images/523899985/Comic_Book_normal.png",
+            "description": "Web App Developer at the Sunlight Labs",
+            "influence_level": "10",
+            "hits": 6,
+            "url": "http://twitter.com/luigimontanez",
+            "topsy_author_url": "http://topsy.com/twitter/luigimontanez"
+        },
+        {
+            "name": "Locomotivation",
+            "nick": "locomotivation",
+            "photo_url": "http://a1.twimg.com/profile_images/386446850/twitterProfilePhoto_normal.jpg",
+            "description": "The code blog from the guys at Squeejee.",
+            "influence_level": "5",
+            "hits": 12,
+            "url": "http://twitter.com/locomotivation",
+            "topsy_author_url": "http://topsy.com/twitter/locomotivation"
+        },
+        {
+            "name": "Adam Stacoviak",
+            "nick": "adamstac",
+            "photo_url": "http://a1.twimg.com/profile_images/493267610/twitterProfilePhoto_normal.jpg",
+            "description": "Co-founder of Handcrafted, co-producer of The Web 2.0 Show podcast, and a lover of beautiful UI/UX. You should follow me :)",
+            "influence_level": "3",
+            "hits": 11,
+            "url": "http://twitter.com/adamstac",
+            "topsy_author_url": "http://topsy.com/twitter/adamstac"
+        },
+        {
+            "name": "Rupak Ganguly",
+            "nick": "rupakg",
+            "photo_url": "http://a3.twimg.com/profile_images/469869723/twitterProfilePhoto_normal.jpg",
+            "description": "RoR freelancer. .NET architect. Love C#. Rails Magazine Editor.",
+            "influence_level": "1",
+            "hits": 9,
+            "url": "http://twitter.com/rupakg",
+            "topsy_author_url": "http://topsy.com/twitter/rupakg"
+        },
+        {
+            "name": "cglee",
+            "nick": "cglee",
+            "photo_url": "http://s.twimg.com/a/1253209888/images/default_profile_4_normal.png",
+            "description": "Rails developer",
+            "influence_level": "1",
+            "hits": 9,
+            "url": "http://twitter.com/cglee",
+            "topsy_author_url": "http://topsy.com/twitter/cglee"
+        },
+        {
+            "name": "DarthMolen",
+            "nick": "darthmolen",
+            "photo_url": "http://a3.twimg.com/profile_images/53887999/avatar_12_normal.gif",
+            "description": "MMA Radio Show Co-Host &quot;The No Holds Barred Show&quot;",
+            "influence_level": "8",
+            "hits": 6,
+            "url": "http://twitter.com/darthmolen",
+            "topsy_author_url": "http://topsy.com/twitter/darthmolen"
+        },
+        {
+            "name": "Chris Eppstein",
+            "nick": "chriseppstein",
+            "photo_url": "http://a1.twimg.com/profile_images/51769630/Photo_5_normal.jpg",
+            "description": "Father, Software Engineer, Drinker of Beer",
+            "influence_level": "4",
+            "hits": 8,
+            "url": "http://twitter.com/chriseppstein",
+            "topsy_author_url": "http://topsy.com/twitter/chriseppstein"
+        },
+        {
+            "name": "Squeejee",
+            "nick": "squeejeeinc",
+            "photo_url": "http://a3.twimg.com/profile_images/69807891/tool_normal.png",
+            "description": "Ruby on Rails Developers, Entrepreneurs, Builders",
+            "influence_level": "3",
+            "hits": 7,
+            "url": "http://twitter.com/squeejeeinc",
+            "topsy_author_url": "http://topsy.com/twitter/squeejeeinc"
+        }]
+    }
+}
