@@ -1,6 +1,6 @@
 # Topsy
 
-Simple Ruby wrapper for the Topsy.com Otter API.
+Simple Ruby wrapper for the [Topsy.com](http://topsy.com) Otter API.
 
 ## Installation
 
