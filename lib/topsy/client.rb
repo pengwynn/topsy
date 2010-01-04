@@ -7,9 +7,10 @@ module Topsy
     # Returns Profile information for an author (a twitter profile indexed by Topsy). The response contains the name, description (biography) and the influence level of the author
     #
     # @param [String] url URL string for the author.
-    # @return [Hashie::Mash]
+    # @return [Topsy::Author]
     def author_info(url)
-      handle_response(self.class.get("/authorinfo.json", :query => {:url => url}))
+      authorinfo = handle_response(self.class.get("/authorinfo.json", :query => {:url => url}))
+      Topsy::Author.new(authorinfo)
     end
 
     # Returns list of authors that talk about the query. The list is sorted by frequency of posts and the influence of authors.

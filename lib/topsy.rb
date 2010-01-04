@@ -171,4 +171,5 @@ module Topsy
 end
 
 require File.join(directory, 'topsy', 'search_counts')
+require File.join(directory, 'topsy', 'author')
 require File.join(directory, 'topsy', 'client')

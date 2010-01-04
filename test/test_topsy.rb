@@ -7,8 +7,15 @@ class TestTopsy < Test::Unit::TestCase
     should "return author info for a profile url" do
       stub_get("/authorinfo.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "authorinfo.json")
       info = Topsy.author_info("http://twitter.com/pengwynn")
+      info.class.should == Topsy::Author
       info.nick.should == 'pengwynn'
       info.influence_level.should == 10
+      assert info.description.include? "Ruby"
+      info.name.should == "Wynn Netherland"
+      info.url.should == "http://twitter.com/pengwynn"
+      info.topsy_author_url.should == "http://topsy.com/twitter/pengwynn"
+      # info.type.should == 'twitter' this will throw 'warning: Object#type is deprecated; use Object#class' - 
+      # maybe we should use an alias, topsy_type? 
     end
     
     should "return search for authors" do
