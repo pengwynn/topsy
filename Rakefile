@@ -9,7 +9,7 @@ begin
     gem.description = %Q{Ruby wrapper for the Topsy otterapi}
     gem.email = "wynn.netherland@gmail.com"
     gem.homepage = "http://github.com/pengwynn/topsy"
-    gem.authors = ["Wynn Netherland"]
+    gem.authors = ["Wynn Netherland", "Ernesto Tagwerker"]
     
     gem.add_dependency('hashie', '~> 0.1.3')
     gem.add_dependency('httparty', '~> 0.4.5')
