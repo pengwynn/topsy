@@ -1,0 +1,8 @@
+# Topsy
+
+Here is the TODO list for the topsy gem. 
+
+## Create objects for each response of the Otter API
+## Update documentation for each method and add examples
+## Add a rate limit method to the API implementation
+
