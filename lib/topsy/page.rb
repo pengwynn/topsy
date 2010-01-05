@@ -14,15 +14,21 @@ module Topsy
     property :list
     property :page
     property :perpage
+    property :window
     
     def to_s
       "Topsy Page: #{page} of #{total}, #{list.size} authors"
+    end
+
+    def initialize(content, klass)
+      @klass = klass
+      super(content)
     end
     
     def list=(value)
       result = []
       if value
-        value.each{ |x| result << Author.new(x) }
+        value.each{ |x| result << @klass.new(x) }
         self[:list] = result  
       else
         self[:list] = value

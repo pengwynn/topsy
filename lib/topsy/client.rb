@@ -32,11 +32,12 @@ module Topsy
     # @option options [String] :contains Query string to filter results
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-    # @return [Hashie::Mash]
+    # @return [Topsy::Page]
     def link_posts(url, options={})
       query = {:url => url}
       query.merge!(options)
-      handle_response(self.class.get("/linkposts.json", :query => query))
+      linkposts = handle_response(self.class.get("/linkposts.json", :query => query))
+      Topsy::Page.new(linkposts,Topsy::Linkpost)
     end
     
     # Returns count of links posted by an author. This is the efficient, count-only version of /linkposts
@@ -56,9 +57,10 @@ module Topsy
     # @param [Hash] options method options
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-    # @return [Hashie::Mash]
+    # @return [Topsy::Page]
     def profile_search(q, options={})
-      handle_response(self.class.get("/profilesearch.json", :query => {:q => q}.merge(options)))
+      results = handle_response(self.class.get("/profilesearch.json", :query => {:q => q}.merge(options)))
+      Topsy::Page.new(results,Topsy::Author)
     end
     
     # Returns list of URLs related to a given URL
@@ -67,9 +69,10 @@ module Topsy
     # @param [Hash] options method options
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-    # @return [Hashie::Mash]
+    # @return [Topsy::Page]
     def related(url, options={})
-      handle_response(self.class.get("/related.json", :query => {:url => url}.merge(options)))
+      response = handle_response(self.class.get("/related.json", :query => {:url => url}.merge(options)))
+      Topsy::Page.new(response,Topsy::LinkSearchResult)
     end
     
     # Returns list of results for a query.
@@ -79,9 +82,10 @@ module Topsy
     # @option options [String] :window Time window for results. (default: 'a') Options: auto - automatically pick the most recent and relevant window. h last hour, d last day, w last week, m last month, a all time
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-    # @return [Hashie::Mash]
+    # @return [Topsy::Page]
     def search(q, options={})
-      handle_response(self.class.get("/search.json", :query => {:q => q}.merge(options)))
+      results = handle_response(self.class.get("/search.json", :query => {:q => q}.merge(options)))
+      Topsy::Page.new(results,Topsy::LinkSearchResult)
     end
 
     # Returns count of results for a search query.

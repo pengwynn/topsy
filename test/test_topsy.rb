@@ -30,9 +30,14 @@ class TestTopsy < Test::Unit::TestCase
     should "list of urls posted by an author" do
       stub_get("/linkposts.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "linkposts.json")
       results = Topsy.link_posts("http://twitter.com/pengwynn")
-      
+      results.class.should == Topsy::Page
       results.total.should == 1004
+      results.list.first.class.should == Topsy::Linkpost
       results.list.first.content.should == 'For auld lang syne, my dear: http://en.wikipedia.org/wiki/Auld_Lang_Syne#Lyrics'
+      results.list.first.permalink_url.should == 'http://twitter.com/pengwynn/status/7253938349'
+      results.list.first.target.class.should == Topsy::Target
+      results.list.first.date.should == 1262307998
+      results.list.first.date_alpha.should == '16 hours ago'
     end
     
     should "return count of links posted by an author" do
@@ -46,22 +51,42 @@ class TestTopsy < Test::Unit::TestCase
     should "return a list of author profiles that match the query." do
       stub_get("/profilesearch.json?q=pengwynn", "profilesearch.json")
       results = Topsy.profile_search("pengwynn")
+      results.class.should == Topsy::Page
       results.total.should == 1
+      results.list.first.class.should == Topsy::Author
       results.list.first.influence_level.should == 10
     end
     
     should "return a list of URLs related to a given URL" do
       stub_get("/related.json?url=http%3A%2F%2Fgemcutter.org", "related.json")
       results = Topsy.related("http://gemcutter.org")
+      results.class.should == Topsy::Page
       results.total.should == 17
+      results.list.first.class.should == Topsy::LinkSearchResult
       results.list.first.title.should == 'the update | gemcutter | awesome gem hosting'
+      results.list.first.trackback_total.should == 17
+      results.list.first.topsy_trackback_url.should == "http://topsy.com/tb/update.gemcutter.org/"
+      results.list.first.url.should == "http://update.gemcutter.org/"
     end
     
     should "return a list of results for a query" do
       stub_get("/search.json?q=NYE", "search.json")
       results = Topsy.search("NYE")
+      results.class.should == Topsy::Page
       results.total.should == 117731
+      results.page.should == 1
+      results.perpage.should == 10
+      results.window.should == "a"
+      results.list.first.class.should == Topsy::LinkSearchResult
       results.list.first.score.should == 4.70643044
+      results.list.first.trackback_permalink.should == "http://twitter.com/spin/status/5164154014"
+      results.list.first.hits.should == 397
+      results.list.first.trackback_total.should == 2268
+      results.list.first.topsy_trackback_url.should == "http://topsy.com/trackback?url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXGK84Poeynk"
+      results.list.first.url.should == "http://www.youtube.com/watch?v=XGK84Poeynk"
+      results.list.first.content.should == "Science, autotuned, with Sagan, Bill Nye, Tyson, Feynman http://bit.ly/2tDk4y win!"
+      results.list.first.title.should == "YouTube - Symphony of Science - 'We Are All Connected' (ft. Sagan, Feynman, deGrasse Tyson & Bill Nye)"
+      results.list.first.highlight.should == "Science, autotuned, with Sagan, Bill <span class=\"highlight-term\">Nye</span>, Tyson, Feynman http://bit.ly/2tDk4y win! " 
     end
 
     should "return search counts for a term" do

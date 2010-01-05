@@ -48,7 +48,7 @@ module Topsy
   # @return [Topsy::Page]
   def self.author_search(q, options={})
     result = Topsy::Client.new.author_search(q, options)
-    Topsy::Page.new(result)
+    Topsy::Page.new(result, Topsy::Author)
   end
   
   # Returns list of URLs posted by an author
@@ -173,6 +173,9 @@ module Topsy
 end
 
 require File.join(directory, 'topsy', 'page')
+require File.join(directory, 'topsy', 'linkpost')
+require File.join(directory, 'topsy', 'target')
+require File.join(directory, 'topsy', 'link_search_result')
 require File.join(directory, 'topsy', 'linkpost_count')
 require File.join(directory, 'topsy', 'search_counts')
 require File.join(directory, 'topsy', 'author')

@@ -11,9 +11,22 @@
 module Topsy
   
   class Linkpost < Hashie::Dash
+    property :permalink_url
+    property :target
+    property :date
+    property :content
+    property :date_alpha
 
     def to_s
       "Topsy Linkpost: #{permalink_url}, @#{content}"
+    end
+    
+    def target=(value)
+      if value
+        self[:target] = Topsy::Target.new(value)  
+      else
+        self[:target] = value
+      end
     end
     
   end
