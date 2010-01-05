@@ -1,0 +1,15 @@
+{
+    "request": {
+        "response_type": "json",
+        "resource": "credit",
+        "parameters": {},
+        "url": "http://button.topsy.com/credit.json"
+    },
+    "response": {
+        "remaining": 10000,
+        "reset": 1262707200,
+        "limit": 10000,
+        "refresh_in_secs": 1503
+    }
+}
+

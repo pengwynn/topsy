@@ -32,11 +32,16 @@ def topsy_url(url)
   url =~ /^http/ ? url : "http://otter.topsy.com#{url}"
 end
 
-def stub_get(url, filename, status=nil)
-  options = {:body => fixture_file(filename)}
-  options.merge!({:status => status}) unless status.nil?
+def stub_get(url, filename, options={})
+  opts = {:body => fixture_file(filename)}.merge(options)
   
-  FakeWeb.register_uri(:get, topsy_url(url), options)
+  headers = {
+    'x-ratelimit-remaining' => '9998',
+    'x-ratelimit-limit' => '10000',
+    'x-ratelimit-reset' => '1262707200'
+  }
+  
+  FakeWeb.register_uri(:get, topsy_url(url), headers.merge(opts))
 end
 
 def stub_post(url, filename)

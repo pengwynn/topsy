@@ -168,10 +168,28 @@ module Topsy
   def self.url_info(url)
     Topsy::Client.new.url_info(url)
   end
+  
+  # Returns info about API rate limiting
+  #
+  # @return [RateLimitInfo]
+  def self.credit
+    Topsy::Client.new.credit
+  end
+  
+
+  def self.rate_limit
+    self.credit if @rate_limit_info.nil?
+    @rate_limit_info
+  end
+  
+  def self.rate_limit=(info)
+    @rate_limit_info = Topsy::RateLimitInfo.new(info)
+  end
 
   
 end
 
+require File.join(directory, 'topsy', 'rate_limit_info')
 require File.join(directory, 'topsy', 'author')
 require File.join(directory, 'topsy', 'linkpost')
 require File.join(directory, 'topsy', 'link_search_result')

@@ -4,6 +4,25 @@ class TestTopsy < Test::Unit::TestCase
   
   context "when hitting the Otter API" do
     
+    should "return rate limit information when calling credit" do
+      stub_get("/credit.json", "credit.json")
+      Topsy.rate_limit.limit.should == 10000
+      Topsy.rate_limit.remaining.should == 9998
+      Topsy.rate_limit.reset.should == Time.at(1262707200)
+    end
+    
+    should "return rate limit information with every request" do
+
+      # FakeWeb.register_uri(:get, "http://otter.topsy.com/authorinfo.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", headers)
+      stub_get("/authorinfo.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "authorinfo.json")
+      
+      info = Topsy.author_info("http://twitter.com/pengwynn")
+      
+      Topsy.rate_limit.limit.should == 10000
+      Topsy.rate_limit.remaining.should == 9998
+      Topsy.rate_limit.reset.should == Time.at(1262707200)
+    end
+    
     should "return author info for a profile url" do
       stub_get("/authorinfo.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "authorinfo.json")
       info = Topsy.author_info("http://twitter.com/pengwynn")

@@ -4,6 +4,13 @@ module Topsy
     format :json
     base_uri "http://otter.topsy.com"
     
+    # Returns info about API rate limiting
+    #
+    # @return [RateLimitInfo]
+    def credit
+      handle_response(self.class.get("/credit.json"))
+    end
+    
     # Returns Profile information for an author (a twitter profile indexed by Topsy). The response contains the name, description (biography) and the influence level of the author
     #
     # @param [String] url URL string for the author.
@@ -163,6 +170,7 @@ module Topsy
 
       def handle_response(response)
         raise_errors(response)
+        get_rate_limit_status(response)
         mashup(response)
       end
 
@@ -184,6 +192,15 @@ module Topsy
 
       def mashup(response)
         Hashie::Mash.new(response).response
+      end
+      
+      def get_rate_limit_status(response)
+        headers = {
+          'limit' => response.headers['x-ratelimit-limit'].first.to_i,
+          'remaining' => response.headers['x-ratelimit-remaining'].first.to_i,
+          'reset' => response.headers['x-ratelimit-reset'].first.to_i
+        }
+        Topsy.rate_limit = Topsy::RateLimitInfo.new(headers)
       end
 
   end
