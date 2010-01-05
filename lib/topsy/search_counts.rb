@@ -6,41 +6,20 @@ module Topsy
     property :m, :default => 0
     property :a, :default => 0
     
-    def last_hour
-      h
-    end
+    alias :hour :h
+    alias :this_hour :h
     
-    def this_hour
-      h
-    end
+    alias :today :d
     
-    def today
-      d
-    end
+    alias :week :w
+    alias :this_week :w
     
-    def last_week
-      w
-    end
+    alias :month :m
+    alias :this_month :m
     
-    def this_week
-      w
-    end
+    alias :overall :a
+    alias :all_time :a
     
-    def last_month
-      m
-    end
-    
-    def this_month
-      m
-    end
-    
-    def all_time
-      a
-    end
-    
-    def overall
-      a
-    end
     
   end
 end

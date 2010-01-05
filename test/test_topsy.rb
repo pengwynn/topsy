@@ -93,8 +93,8 @@ class TestTopsy < Test::Unit::TestCase
       stub_get("/searchcount.json?q=Balloon%20Boy", "searchcount.json")
       counts = Topsy.search_count('Balloon Boy')
       counts.class.should == Topsy::SearchCounts
-      counts.last_hour.should == 0
-      counts.last_month.should == 3659
+      counts.this_hour.should == 0
+      counts.this_month.should == 3659
       counts.all_time.should == 42289
     end
     
