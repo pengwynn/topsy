@@ -145,11 +145,7 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.class.should == Topsy::Tweet
       results.list.first.date.year.should == 2009
       results.list.first.permalink_url.should == "http://twitter.com/orrka/status/6435248067"
-      
-      # 
-      # TODO FIX THIS: results.list.first.date.should == 123 #Time.at(6435248067)
-      #
-      
+      results.list.first.date.should == Time.at(1260204073)
       results.list.first.content.should == "Just added some portfolio entries to http://orrka.com/"
       results.list.first.type.should == "tweet"
       results.list.first.author.class.should == Topsy::Author
