@@ -92,6 +92,7 @@ class TestTopsy < Test::Unit::TestCase
     should "return search counts for a term" do
       stub_get("/searchcount.json?q=Balloon%20Boy", "searchcount.json")
       counts = Topsy.search_count('Balloon Boy')
+      counts.class.should == Topsy::SearchCounts
       counts.last_hour.should == 0
       counts.last_month.should == 3659
       counts.all_time.should == 42289
@@ -100,6 +101,9 @@ class TestTopsy < Test::Unit::TestCase
     should "return count of tweets for a url" do
       stub_get("/stats.json?url=http%3A%2F%2Fgithub.com%2Fpengwynn%2Flinkedin", "stats.json")
       stats = Topsy.stats("http://github.com/pengwynn/linkedin")
+      stats.class.should == Topsy::Stats
+      stats.topsy_trackback_url.should == "http://topsy.com/tb/github.com/pengwynn/linkedin"
+      stats.contains.should == 0
       stats.all.should == 11
       stats.influential.should == 3
     end
@@ -107,28 +111,55 @@ class TestTopsy < Test::Unit::TestCase
     should "return a list of tags associated with a url" do
       stub_get("/tags.json?url=http%3A%2F%2Fgemcutter.org", "tags.json")
       results = Topsy.tags("http://gemcutter.org")
+      results.class.should == Topsy::Page
       results.total.should == 9
+      results.list.first.class.should == Topsy::Tag
       assert results.list.map{|t| t.name}.include?("ruby")
+      results.list.first.url.should == "http://topsy.com/s?q=itunesu"
+      results.list.first.name.should == "itunesu"
     end
     
     should "return a list of tweets (trackbacks) that mention the query URL" do
       stub_get("/trackbacks.json?url=http%3A%2F%2Forrka.com", "trackbacks.json")
       results = Topsy.trackbacks("http://orrka.com")
+      results.class.should == Topsy::Page
       results.total.should == 3
+      results.list.first.class.should == Topsy::Tweet
       results.list.first.date.year.should == 2009
+      results.list.first.permalink_url.should == "http://twitter.com/orrka/status/6435248067"
+      
+      # 
+      # TODO FIX THIS: results.list.first.date.should == Time.at(6435248067)
+      #
+      
+      results.list.first.content.should == "Just added some portfolio entries to http://orrka.com/"
+      results.list.first.type.should == "tweet"
+      results.list.first.author.class.should == Topsy::Author
+      results.list.first.date_alpha.should == "25 days ago"
     end
     
     should "return a list of trending terms" do
       stub_get("/trending.json", "trending.json")
       results = Topsy.trending
+      results.class.should == Topsy::Page
       results.total.should == 1379
+      results.list.first.class.should == Topsy::Trend
       assert results.list.map{|t| t.term}.flatten.include?("auld lang syne")
+      results.list.first.url.should == "http://topsy.com/s?q=photoshop+photoshop"
+      results.list.first.term.should == "photoshop photoshop"
     end
     
     should "return info about a url" do
       stub_get("/urlinfo.json?url=http%3A%2F%2Fwynnnetherland.com", 'urlinfo.json')
       results = Topsy.url_info('http://wynnnetherland.com')
+      results.class.should == Topsy::UrlInfo
       results.trackback_total.should == 39379
+      results.topsy_trackback_url.should == "http://topsy.com/tb/twitter.com/"
+      results.oneforty.should == "trending topics -  -amp09 right up there past the president today! :) http://tiny.cc/3yNbv"
+      results.url.should == "http://twitter.com/"
+      results.title.should == "trending topics -  -amp09 right up there past the president today! :)"
+      results.description.should == "Social networking"
+      results.description_attribution.should == "From DMOZ"
     end
   end
   

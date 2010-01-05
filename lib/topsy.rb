@@ -172,11 +172,17 @@ module Topsy
   
 end
 
-require File.join(directory, 'topsy', 'page')
+require File.join(directory, 'topsy', 'author')
 require File.join(directory, 'topsy', 'linkpost')
-require File.join(directory, 'topsy', 'target')
 require File.join(directory, 'topsy', 'link_search_result')
 require File.join(directory, 'topsy', 'linkpost_count')
+require File.join(directory, 'topsy', 'page')
 require File.join(directory, 'topsy', 'search_counts')
-require File.join(directory, 'topsy', 'author')
+require File.join(directory, 'topsy', 'stats')
+require File.join(directory, 'topsy', 'target')
+require File.join(directory, 'topsy', 'tag')
+require File.join(directory, 'topsy', 'trend')
+require File.join(directory, 'topsy', 'tweet')
+require File.join(directory, 'topsy', 'url_info')
+
 require File.join(directory, 'topsy', 'client')

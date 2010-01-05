@@ -15,6 +15,7 @@ module Topsy
     property :page
     property :perpage
     property :window
+    property :topsy_trackback_url
     
     def to_s
       "Topsy Page: #{page} of #{total}, #{list.size} authors"

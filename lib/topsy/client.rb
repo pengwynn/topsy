@@ -102,11 +102,12 @@ module Topsy
     # @param [String] url the url to look up
     # @param [Hash] options method options
     # @option options [String] :contains Query string to filter results
-    # @return [Hashie::Mash]
+    # @return [Topsy::Stats]
     def stats(url, options={})
       query = {:url => url}
       query.merge!(options)
-      handle_response(self.class.get("/stats.json", :query => query))
+      response = handle_response(self.class.get("/stats.json", :query => query))
+      Topsy::Stats.new(response)
     end
     
     # Returns list of tags for a URL.
@@ -115,9 +116,10 @@ module Topsy
     # @param [Hash] options method options
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-    # @return [Hashie::Mash]
+    # @return [Topsy::Page]
     def tags(url, options={})
-      handle_response(self.class.get("/tags.json", :query => {:url => url}.merge(options)))
+      response = handle_response(self.class.get("/tags.json", :query => {:url => url}.merge(options)))
+      Topsy::Page.new(response,Topsy::Tag)
     end
     
     # Returns list of tweets (trackbacks) that mention the query URL, most recent first.
@@ -128,13 +130,13 @@ module Topsy
     # @option options [Boolean] :infonly filters trackbacks to influential only (default 0)
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-    # @return [Hashie::Mash]
+    # @return [Topsy::Page]
     def trackbacks(url, options={})
       results = handle_response(self.class.get("/trackbacks.json", :query => {:url => url}.merge(options)))
       results.list.each do |trackback|
         trackback.date = Time.at(trackback.date)
       end
-      results
+      Topsy::Page.new(results,Topsy::Tweet)
     end
     
     # Returns list of trending terms
@@ -144,15 +146,17 @@ module Topsy
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
     # @return [Hashie::Mash]
     def trending(options={})
-      handle_response(self.class.get("/trending.json", :query => options))
+      response = handle_response(self.class.get("/trending.json", :query => options))
+      Topsy::Page.new(response,Topsy::Trend)
     end
     
     # Returns info about a URL
     #
     # @param [String] url the url to look up
-    # @return [Hashie::Mash]
+    # @return [Topsy::UrlInfo]
     def url_info(url)
-      handle_response(self.class.get("/urlinfo.json", :query => {:url => url}))
+      response = handle_response(self.class.get("/urlinfo.json", :query => {:url => url}))
+      Topsy::UrlInfo.new(response)
     end
 
     private
