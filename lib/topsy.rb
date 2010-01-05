@@ -45,9 +45,10 @@ module Topsy
   # @option options [String] :window Time window for results. (default: 'a') Options: auto - automatically pick the most recent and relevant window. h last hour, d last day, w last week, m last month, a all time
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-  # @return [Hashie::Mash]
+  # @return [Topsy::Page]
   def self.author_search(q, options={})
-    Topsy::Client.new.author_search(q, options)
+    result = Topsy::Client.new.author_search(q, options)
+    Topsy::Page.new(result)
   end
   
   # Returns list of URLs posted by an author
@@ -67,9 +68,10 @@ module Topsy
   # @param [String] url URL string for the author.
   # @param [Hash] options method options
   # @option options [String] :contains Query string to filter results
-  # @return [Hashie::Mash]
+  # @return [Topsy::LinkpostCount]
   def self.link_post_count(url, options={})
-    Topsy::Client.new.link_post_count(url, options={})
+    response = Topsy::Client.new.link_post_count(url, options={})
+    Topsy::LinkpostCount.new(response)
   end
   
   # Returns list list of author profiles that match the query. The query is matched against the nick, name and biography information and the results are sorted by closeness of match and the influence of authors.
@@ -170,6 +172,8 @@ module Topsy
   
 end
 
+require File.join(directory, 'topsy', 'page')
+require File.join(directory, 'topsy', 'linkpost_count')
 require File.join(directory, 'topsy', 'search_counts')
 require File.join(directory, 'topsy', 'author')
 require File.join(directory, 'topsy', 'client')

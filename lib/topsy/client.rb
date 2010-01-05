@@ -44,9 +44,10 @@ module Topsy
     # @param [String] url URL string for the author.
     # @param [Hash] options method options
     # @option options [String] :contains Query string to filter results
-    # @return [Hashie::Mash]
+    # @return [Topsy::LinkpostCount]
     def link_post_count(url, options={})
-      handle_response(self.class.get("/linkpostcount.json", :query => {:url => url}.merge(options)))
+      count = handle_response(self.class.get("/linkpostcount.json", :query => {:url => url}.merge(options)))
+      Topsy::LinkpostCount.new(count)
     end
     
     # Returns list list of author profiles that match the query. The query is matched against the nick, name and biography information and the results are sorted by closeness of match and the influence of authors.

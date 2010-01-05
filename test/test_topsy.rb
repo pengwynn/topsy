@@ -21,13 +21,16 @@ class TestTopsy < Test::Unit::TestCase
     should "return search for authors" do
       stub_get("/authorsearch.json?q=pengwynn", "authorsearch.json")
       results = Topsy.author_search("pengwynn")
+      results.class.should == Topsy::Page
       results.total.should == 491
+      results.list.first.class.should == Topsy::Author
       results.list.first.nick.should == 'bradleyjoyce'
     end
     
     should "list of urls posted by an author" do
       stub_get("/linkposts.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "linkposts.json")
       results = Topsy.link_posts("http://twitter.com/pengwynn")
+      
       results.total.should == 1004
       results.list.first.content.should == 'For auld lang syne, my dear: http://en.wikipedia.org/wiki/Auld_Lang_Syne#Lyrics'
     end
@@ -35,6 +38,7 @@ class TestTopsy < Test::Unit::TestCase
     should "return count of links posted by an author" do
       stub_get("/linkpostcount.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "linkpostcount.json")
       counts = Topsy.link_post_count("http://twitter.com/pengwynn")
+      counts.class.should == Topsy::LinkpostCount
       counts.all.should == 1004
       counts.contains.should == 0
     end
