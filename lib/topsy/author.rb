@@ -2,7 +2,7 @@
 # An Author has the following attributes:
 #      "name" : "Barack Obama"
 #      "url" : "http://twitter.com/barackobama",
-#      "type" : "twitter",
+#      "topsy_type" : "twitter",
 #      "nick" : "barackobama",
 #      "description" : "44th President of the United States",
 #      "topsy_author_url" : "http://topsy.com/twitter/barackobama",
@@ -14,6 +14,10 @@ module Topsy
   class Author < Hashie::Mash
     def to_s
       "Topsy Author: #{name}, @#{nick}, #{topsy_author_url}"
+    end
+    
+    def topsy_type
+      self[:type]
     end
   end
 end

@@ -33,11 +33,10 @@ class TestTopsy < Test::Unit::TestCase
       info.name.should == "Wynn Netherland"
       info.url.should == "http://twitter.com/pengwynn"
       info.topsy_author_url.should == "http://topsy.com/twitter/pengwynn"
-      # info.type.should == 'twitter' this will throw 'warning: Object#type is deprecated; use Object#class' - 
-      # maybe we should use an alias, topsy_type? 
+      info.topsy_type.should == 'twitter' 
     end
     
-    should "return search for authors" do
+    should "return a page with a list of authors for the search" do
       stub_get("/authorsearch.json?q=pengwynn", "authorsearch.json")
       results = Topsy.author_search("pengwynn")
       results.class.should == Topsy::Page
@@ -46,7 +45,7 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.nick.should == 'bradleyjoyce'
     end
     
-    should "list of urls posted by an author" do
+    should "return a page with a list of urls posted by an author" do
       stub_get("/linkposts.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "linkposts.json")
       results = Topsy.link_posts("http://twitter.com/pengwynn")
       results.class.should == Topsy::Page
@@ -67,7 +66,7 @@ class TestTopsy < Test::Unit::TestCase
       counts.contains.should == 0
     end
     
-    should "return a list of author profiles that match the query." do
+    should "return a page with a list of authors that match the query." do
       stub_get("/profilesearch.json?q=pengwynn", "profilesearch.json")
       results = Topsy.profile_search("pengwynn")
       results.class.should == Topsy::Page
@@ -76,7 +75,7 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.influence_level.should == 10
     end
     
-    should "return a list of URLs related to a given URL" do
+    should "return a page with a list of URLs related to a given URL" do
       stub_get("/related.json?url=http%3A%2F%2Fgemcutter.org", "related.json")
       results = Topsy.related("http://gemcutter.org")
       results.class.should == Topsy::Page
@@ -88,7 +87,7 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.url.should == "http://update.gemcutter.org/"
     end
     
-    should "return a list of results for a query" do
+    should "return a page with a list of link search results for a query" do
       stub_get("/search.json?q=NYE", "search.json")
       results = Topsy.search("NYE")
       results.class.should == Topsy::Page
@@ -117,7 +116,7 @@ class TestTopsy < Test::Unit::TestCase
       counts.all_time.should == 42289
     end
     
-    should "return count of tweets for a url" do
+    should "return a stats object for a url" do
       stub_get("/stats.json?url=http%3A%2F%2Fgithub.com%2Fpengwynn%2Flinkedin", "stats.json")
       stats = Topsy.stats("http://github.com/pengwynn/linkedin")
       stats.class.should == Topsy::Stats
@@ -127,7 +126,7 @@ class TestTopsy < Test::Unit::TestCase
       stats.influential.should == 3
     end
     
-    should "return a list of tags associated with a url" do
+    should "return a page with a list of tags associated with a url" do
       stub_get("/tags.json?url=http%3A%2F%2Fgemcutter.org", "tags.json")
       results = Topsy.tags("http://gemcutter.org")
       results.class.should == Topsy::Page
@@ -138,7 +137,7 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.name.should == "itunesu"
     end
     
-    should "return a list of tweets (trackbacks) that mention the query URL" do
+    should "return a page with a list of tweets (trackbacks) that mention the query URL" do
       stub_get("/trackbacks.json?url=http%3A%2F%2Forrka.com", "trackbacks.json")
       results = Topsy.trackbacks("http://orrka.com")
       results.class.should == Topsy::Page
@@ -148,7 +147,7 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.permalink_url.should == "http://twitter.com/orrka/status/6435248067"
       
       # 
-      # TODO FIX THIS: results.list.first.date.should == Time.at(6435248067)
+      # TODO FIX THIS: results.list.first.date.should == 123 #Time.at(6435248067)
       #
       
       results.list.first.content.should == "Just added some portfolio entries to http://orrka.com/"
@@ -157,7 +156,7 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.date_alpha.should == "25 days ago"
     end
     
-    should "return a list of trending terms" do
+    should "return a page with a list of trending terms" do
       stub_get("/trending.json", "trending.json")
       results = Topsy.trending
       results.class.should == Topsy::Page
