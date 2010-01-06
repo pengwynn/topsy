@@ -16,7 +16,7 @@ module Topsy
       "Topsy Author: #{name}, @#{nick}, #{topsy_author_url}"
     end
     
-    def topsy_type
+    def type
       self[:type]
     end
   end

@@ -33,7 +33,7 @@ class TestTopsy < Test::Unit::TestCase
       info.name.should == "Wynn Netherland"
       info.url.should == "http://twitter.com/pengwynn"
       info.topsy_author_url.should == "http://topsy.com/twitter/pengwynn"
-      info.topsy_type.should == 'twitter' 
+      info.type.should == 'twitter' 
     end
     
     should "return a page with a list of authors for the search" do
