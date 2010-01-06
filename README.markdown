@@ -11,6 +11,9 @@ Topsy is hosted on Gemcutter, so:
     sudo gem install topsy
 
 ## Usage
+    >> Topsy.rate_limit
+    => <#Topsy::RateLimitInfo limit=10000 remaining=10000 reset=1262804400>
+
     >> Topsy.author_info('http://twitter.com/barackobama')
     => <#Topsy::Author description="44th President of the United States" influence_level=10 name="Barack Obama" nick="barackobama" topsy_author_url="http://topsy.com/twitter/barackobama" type="twitter" url="http://twitter.com/barackobama">
 
