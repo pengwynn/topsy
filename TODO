@@ -2,6 +2,6 @@
 
 Here is the TODO list for the topsy gem. 
 
-## Update documentation for each method and add examples
-## Add more samples to the README.markdown file
+## Add tests for pagination of queries
+## Make windows for queries easier to understand (eg. :window => :day, or :window => :year, or :window => :month)
 
