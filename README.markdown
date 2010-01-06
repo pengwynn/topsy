@@ -4,6 +4,10 @@ Simple Ruby wrapper for the [Topsy.com](http://topsy.com) Otter API. Topsy is a 
 
 ## Installation
 
+Topsy is hosted on Gemcutter, so:
+
+    gem install gemcutter # if necessary
+    gem tumble # if necessary
     sudo gem install topsy
 
 ## Usage
