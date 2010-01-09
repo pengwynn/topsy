@@ -3,10 +3,11 @@ module Topsy
     include HTTParty
     format :json
     base_uri "http://otter.topsy.com"
+    @@windows = {:all => 'a', :auto => 'auto', :week => 'w', :day => 'd', :month => 'm', :hour => 'h'}
     
     # Returns info about API rate limiting
     #
-    # @return [RateLimitInfo]
+    # @return [Topsy::RateLimitInfo]
     def credit
       handle_response(self.class.get("/credit.json"))
     end
@@ -24,11 +25,12 @@ module Topsy
     #
     # @param [String] q the search query string
     # @param [Hash] options method options
-    # @option options [String] :window Time window for results. (default: 'a') Options: auto - automatically pick the most recent and relevant window. h last hour, d last day, w last week, m last month, a all time
+    # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :all all time
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
     # @return [Hashie::Mash]
     def author_search(q, options={})
+      options[:window] = @@windows[options[:window]] if options[:window]
       handle_response(self.class.get("/authorsearch.json", :query => {:q => q}.merge(options)))
     end
     
@@ -41,9 +43,7 @@ module Topsy
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
     # @return [Topsy::Page]
     def link_posts(url, options={})
-      query = {:url => url}
-      query.merge!(options)
-      linkposts = handle_response(self.class.get("/linkposts.json", :query => query))
+      linkposts = handle_response(self.class.get("/linkposts.json", :query => {:url => url}.merge(options)))
       Topsy::Page.new(linkposts,Topsy::Linkpost)
     end
     
@@ -86,11 +86,12 @@ module Topsy
     #
     # @param [String] q the search query string
     # @param [Hash] options method options
-    # @option options [String] :window Time window for results. (default: 'a') Options: auto - automatically pick the most recent and relevant window. h last hour, d last day, w last week, m last month, a all time
+    # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :all all time
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
     # @return [Topsy::Page]
     def search(q, options={})
+      options[:window] = @@windows[options[:window]] if options[:window]
       results = handle_response(self.class.get("/search.json", :query => {:q => q}.merge(options)))
       Topsy::Page.new(results,Topsy::LinkSearchResult)
     end
@@ -151,7 +152,7 @@ module Topsy
     # @param [Hash] options method options
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-    # @return [Hashie::Mash]
+    # @return [Topsy::Page]
     def trending(options={})
       response = handle_response(self.class.get("/trending.json", :query => options))
       Topsy::Page.new(response,Topsy::Trend)

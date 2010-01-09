@@ -3,7 +3,9 @@
 #      "page" : 1,
 #      "total" : "1139",
 #      "perpage" : 15,
-#      "list" : Array of Author instances 
+#      "list" : Array of Author instances
+#      "window" : Optional symbol
+#      "topsy_trackback_url" : String, optional 
 #
 # According to the official Topsy doc: http://code.google.com/p/otterapi/wiki/Resources?tm=6#/authorsearch
 #
@@ -16,6 +18,8 @@ module Topsy
     property :perpage
     property :window
     property :topsy_trackback_url
+    
+    @@windows = {'a' => :all, 'auto' => :auto, 'w' => :week, 'd' => :day, 'm' => :month, 'h' => :hour}
     
     def to_s
       "Topsy Page: #{page} of #{total}, #{list.size} authors"
@@ -35,6 +39,13 @@ module Topsy
         self[:list] = value
       end
     end
+    
+    def window=(value)
+      if value
+        self[:window] = @@windows[value]  
+      end
+    end
+    
   end
  
 end

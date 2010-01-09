@@ -32,7 +32,7 @@ module Topsy
   # Returns profile information for an author (a twitter profile indexed by Topsy). The response contains the name, description (biography) and the influence level of the author
   #
   # @param [String] url URL string for the author.
-  # @return [Hashie::Mash]
+  # @return [Topsy::Author]
   def self.author_info(url)
     Topsy::Client.new.author_info(url)
   end
@@ -42,7 +42,7 @@ module Topsy
   #
   # @param [String] q the search query string
   # @param [Hash] options method options
-  # @option options [String] :window Time window for results. (default: 'a') Options: auto - automatically pick the most recent and relevant window. h last hour, d last day, w last week, m last month, a all time
+  # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :all all time
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
   # @return [Topsy::Page]
@@ -58,9 +58,9 @@ module Topsy
   # @option options [String] :contains Query string to filter results
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-  # @return [Hashie::Mash]
+  # @return [Topsy::Page]
   def self.link_posts(url, options={})
-    Topsy::Client.new.link_posts(url, options={})
+    Topsy::Client.new.link_posts(url, options)
   end
   
   # Returns count of links posted by an author. This is the efficient, count-only version of /linkposts
@@ -70,7 +70,7 @@ module Topsy
   # @option options [String] :contains Query string to filter results
   # @return [Topsy::LinkpostCount]
   def self.link_post_count(url, options={})
-    response = Topsy::Client.new.link_post_count(url, options={})
+    response = Topsy::Client.new.link_post_count(url, options)
     Topsy::LinkpostCount.new(response)
   end
   
@@ -80,7 +80,7 @@ module Topsy
   # @param [Hash] options method options
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-  # @return [Hashie::Mash]
+  # @return [Topsy::Page]
   def self.profile_search(q, options={})
     Topsy::Client.new.profile_search(q, options)
   end
@@ -91,7 +91,7 @@ module Topsy
   # @param [Hash] options method options
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-  # @return [Hashie::Mash]
+  # @return [Topsy::Page]
   def self.related(url, options={})
     Topsy::Client.new.related(url, options)
   end
@@ -100,10 +100,10 @@ module Topsy
   #
   # @param [String] q the search query string
   # @param [Hash] options method options
-  # @option options [String] :window Time window for results. (default: 'a') Options: auto - automatically pick the most recent and relevant window. h last hour, d last day, w last week, m last month, a all time
+  # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :all all time
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-  # @return [Hashie::Mash]
+  # @return [Topsy::Page]
   def self.search(q, options={})
     Topsy::Client.new.search(q, options)
   end
@@ -121,7 +121,7 @@ module Topsy
   # @param [String] url the url to look up
   # @param [Hash] options method options
   # @option options [String] :contains Query string to filter results
-  # @return [Hashie::Mash]
+  # @return [Topsy::Stats]
   def self.stats(url, options={})
     Topsy::Client.new.stats(url, options)
   end
@@ -132,7 +132,7 @@ module Topsy
   # @param [Hash] options method options
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-  # @return [Hashie::Mash]
+  # @return [Topsy::Page]
   def self.tags(url, options={})
     Topsy::Client.new.tags(url, options)
   end
@@ -145,7 +145,7 @@ module Topsy
   # @option options [Boolean] :infonly filters trackbacks to influential only (default 0)
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-  # @return [Hashie::Mash]
+  # @return [Topsy::Page]
   def self.trackbacks(url, options={})
     Topsy::Client.new.trackbacks(url, options)
   end
@@ -156,7 +156,7 @@ module Topsy
   # @param [Hash] options method options
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-  # @return [Hashie::Mash]
+  # @return [Topsy::Page]
   def self.trending(options={})
     Topsy::Client.new.trending(options)
   end
@@ -164,14 +164,14 @@ module Topsy
   # Returns info about a URL
   #
   # @param [String] url the url to look up
-  # @return [Hashie::Mash]
+  # @return [Topsy::UrlInfo]
   def self.url_info(url)
     Topsy::Client.new.url_info(url)
   end
   
   # Returns info about API rate limiting
   #
-  # @return [RateLimitInfo]
+  # @return [Topsy::RateLimitInfo]
   def self.credit
     Topsy::Client.new.credit
   end

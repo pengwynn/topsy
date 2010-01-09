@@ -45,6 +45,16 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.nick.should == 'bradleyjoyce'
     end
     
+    should "return the second page of an author search with a list of 10 authors" do
+      stub_get("/authorsearch.json?q=pengwynn&page=2&perpage=10", "authorsearch-page2.json")
+      results = Topsy.author_search("pengwynn", :page => 2, :perpage => 10)
+      results.class.should == Topsy::Page
+      results.total.should == 512
+      results.perpage.should == 10
+      results.page.should == 2
+      results.list.size.should == 10
+    end
+    
     should "return a page with a list of urls posted by an author" do
       stub_get("/linkposts.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "linkposts.json")
       results = Topsy.link_posts("http://twitter.com/pengwynn")
@@ -56,6 +66,15 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.target.class.should == Topsy::Target
       results.list.first.date.should == 1262307998
       results.list.first.date_alpha.should == '16 hours ago'
+    end
+    
+    should "return the second page of 10 urls posted by an author" do
+      stub_get("/linkposts.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn&page=2&perpage=5", "linkposts-page2.json")
+      results = Topsy.link_posts("http://twitter.com/pengwynn", :page => 2, :perpage => 5)
+      results.total.should == 987
+      results.perpage.should == 5
+      results.page.should == 2
+      results.list.size.should == 5
     end
     
     should "return count of links posted by an author" do
@@ -88,13 +107,13 @@ class TestTopsy < Test::Unit::TestCase
     end
     
     should "return a page with a list of link search results for a query" do
-      stub_get("/search.json?q=NYE", "search.json")
-      results = Topsy.search("NYE")
+      stub_get("/search.json?q=NYE&window=m", "search.json")
+      results = Topsy.search("NYE", :window => :month)
       results.class.should == Topsy::Page
       results.total.should == 117731
       results.page.should == 1
       results.perpage.should == 10
-      results.window.should == "a"
+      results.window.should == :month
       results.list.first.class.should == Topsy::LinkSearchResult
       results.list.first.score.should == 4.70643044
       results.list.first.trackback_permalink.should == "http://twitter.com/spin/status/5164154014"
