@@ -23,3 +23,5 @@ rdoc
 pkg
 
 ## PROJECT::SPECIFIC
+doc
+.yardoc
