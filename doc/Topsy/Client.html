@@ -76,6 +76,19 @@
 <div class="clear"></div>
 
 
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="windows-classvariable ">@@windows =
+            <span class="summary_desc"></span>
+        </dt>
+        <dd><pre class="code"><span class='lbrace token'>{</span><span class='symbol val'>:all</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'a'</span><span class='comma token'>,</span> <span class='symbol val'>:auto</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'auto'</span><span class='comma token'>,</span> <span class='symbol val'>:week</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'w'</span><span class='comma token'>,</span> <span class='symbol val'>:day</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'d'</span><span class='comma token'>,</span> <span class='symbol val'>:month</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'m'</span><span class='comma token'>,</span> <span class='symbol val'>:hour</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'h'</span><span class='rbrace token'>}</span>
+</pre></dd>
+      
+    </dl>
+  
+
 
   
 
@@ -133,7 +146,7 @@ Returns list of authors that talk about the query.
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#credit-instance_method" title="#credit (instance method)">- (RateLimitInfo) <strong>credit</strong> </a>
+      <a href="#credit-instance_method" title="#credit (instance method)">- (Topsy::RateLimitInfo) <strong>credit</strong> </a>
     
 
     
@@ -364,7 +377,7 @@ first.
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#trending-instance_method" title="#trending (instance method)">- (Hashie::Mash) <strong>trending</strong>(options = {}) </a>
+      <a href="#trending-instance_method" title="#trending (instance method)">- (Topsy::Page) <strong>trending</strong>(options = {}) </a>
     
 
     
@@ -475,13 +488,13 @@ URL string for the author.
       <pre class="lines">
 
 
-18
 19
 20
-21</pre>
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 19</span>
 
 <span class='def def kw'>def</span> <span class='author_info identifier id'>author_info</span><span class='lparen token'>(</span><span class='url identifier id'>url</span><span class='rparen token'>)</span>
   <span class='authorinfo identifier id'>authorinfo</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/authorinfo.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:url</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='url identifier id'>url</span><span class='rbrace token'>}</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
@@ -561,7 +574,7 @@ method options
     <ul class="option">
       
         <li>
-          <span class="type">(<tt>String</tt>)</span>
+          <span class="type">(<tt>Symbol</tt>)</span>
           <span class="name">:window</span>
           <span class="default">
             
@@ -569,9 +582,9 @@ method options
             
           </span>
           &mdash;
-Time window for results. (default: &#8216;a&#8217;) Options: auto -
-automatically pick the most recent and relevant window. h last hour, d last
-day, w last week, m last month, a all time
+Time window for results. (default: :auto) Options: :auto - automatically
+pick the most recent and relevant window. :hour last hour, :day last day,
+:week last week, :month last month, :all all time
 
 
         </tr>
@@ -626,14 +639,16 @@ limit number of results per page. (default: 10, max: 50)
       <pre class="lines">
 
 
-31
 32
-33</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 32</span>
 
 <span class='def def kw'>def</span> <span class='author_search identifier id'>author_search</span><span class='lparen token'>(</span><span class='q identifier id'>q</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:window</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='@@windows ivar id'>@@windows</span><span class='lbrack token'>[</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:window</span><span class='rbrack token'>]</span><span class='rbrack token'>]</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:window</span><span class='rbrack token'>]</span>
   <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/authorsearch.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:q</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='q identifier id'>q</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
@@ -645,7 +660,7 @@ limit number of results per page. (default: 10, max: 50)
       <div class="method_details ">
   <p class="signature " id="credit-instance_method">
   
-    - (<tt><a href="RateLimitInfo.html" title="RateLimitInfo">RateLimitInfo</a></tt>) <strong>credit</strong> 
+    - (<tt><a href="RateLimitInfo.html" title="Topsy::RateLimitInfo">Topsy::RateLimitInfo</a></tt>) <strong>credit</strong> 
   
 
   
@@ -664,7 +679,7 @@ Returns info about API rate limiting
   
     <li>
       
-        <span class='type'>(<tt><a href="RateLimitInfo.html" title="RateLimitInfo">RateLimitInfo</a></tt>)</span>
+        <span class='type'>(<tt><a href="RateLimitInfo.html" title="Topsy::RateLimitInfo">Topsy::RateLimitInfo</a></tt>)</span>
       
       
       
@@ -679,12 +694,12 @@ Returns info about API rate limiting
       <pre class="lines">
 
 
-10
 11
-12</pre>
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 11</span>
 
 <span class='def def kw'>def</span> <span class='credit identifier id'>credit</span>
   <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/credit.json&quot;</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
@@ -946,20 +961,16 @@ limit number of results per page. (default: 10, max: 50)
       <pre class="lines">
 
 
-43
-44
 45
 46
 47
 48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 45</span>
 
 <span class='def def kw'>def</span> <span class='link_posts identifier id'>link_posts</span><span class='lparen token'>(</span><span class='url identifier id'>url</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='query identifier id'>query</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='symbol val'>:url</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='url identifier id'>url</span><span class='rbrace token'>}</span>
-  <span class='query identifier id'>query</span><span class='dot token'>.</span><span class='merge! fid id'>merge!</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span>
-  <span class='linkposts identifier id'>linkposts</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/linkposts.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='query identifier id'>query</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='linkposts identifier id'>linkposts</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/linkposts.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:url</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='url identifier id'>url</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
   <span class='Topsy constant id'>Topsy</span><span class='colon2 op'>::</span><span class='Page constant id'>Page</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='linkposts identifier id'>linkposts</span><span class='comma token'>,</span><span class='Topsy constant id'>Topsy</span><span class='colon2 op'>::</span><span class='Linkpost constant id'>Linkpost</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
@@ -1305,7 +1316,7 @@ method options
     <ul class="option">
       
         <li>
-          <span class="type">(<tt>String</tt>)</span>
+          <span class="type">(<tt>Symbol</tt>)</span>
           <span class="name">:window</span>
           <span class="default">
             
@@ -1313,9 +1324,9 @@ method options
             
           </span>
           &mdash;
-Time window for results. (default: &#8216;a&#8217;) Options: auto -
-automatically pick the most recent and relevant window. h last hour, d last
-day, w last week, m last month, a all time
+Time window for results. (default: :auto) Options: :auto - automatically
+pick the most recent and relevant window. :hour last hour, :day last day,
+:week last week, :month last month, :all all time
 
 
         </tr>
@@ -1373,12 +1384,14 @@ limit number of results per page. (default: 10, max: 50)
 93
 94
 95
-96</pre>
+96
+97</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 93</span>
 
 <span class='def def kw'>def</span> <span class='search identifier id'>search</span><span class='lparen token'>(</span><span class='q identifier id'>q</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:window</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='@@windows ivar id'>@@windows</span><span class='lbrack token'>[</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:window</span><span class='rbrack token'>]</span><span class='rbrack token'>]</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:window</span><span class='rbrack token'>]</span>
   <span class='results identifier id'>results</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/search.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:q</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='q identifier id'>q</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
   <span class='Topsy constant id'>Topsy</span><span class='colon2 op'>::</span><span class='Page constant id'>Page</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='results identifier id'>results</span><span class='comma token'>,</span><span class='Topsy constant id'>Topsy</span><span class='colon2 op'>::</span><span class='LinkSearchResult constant id'>LinkSearchResult</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
@@ -1446,13 +1459,13 @@ the search query string
       <pre class="lines">
 
 
-102
 103
 104
-105</pre>
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 103</span>
 
 <span class='def def kw'>def</span> <span class='search_count identifier id'>search_count</span><span class='lparen token'>(</span><span class='q identifier id'>q</span><span class='rparen token'>)</span>
   <span class='counts identifier id'>counts</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/searchcount.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:q</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='q identifier id'>q</span><span class='rbrace token'>}</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
@@ -1566,15 +1579,15 @@ Query string to filter results
       <pre class="lines">
 
 
-113
 114
 115
 116
 117
-118</pre>
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 114</span>
 
 <span class='def def kw'>def</span> <span class='stats identifier id'>stats</span><span class='lparen token'>(</span><span class='url identifier id'>url</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='query identifier id'>query</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='symbol val'>:url</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='url identifier id'>url</span><span class='rbrace token'>}</span>
@@ -1704,13 +1717,13 @@ limit number of results per page. (default: 10, max: 50)
       <pre class="lines">
 
 
-127
 128
 129
-130</pre>
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 128</span>
 
 <span class='def def kw'>def</span> <span class='tags identifier id'>tags</span><span class='lparen token'>(</span><span class='url identifier id'>url</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='response identifier id'>response</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/tags.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:url</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='url identifier id'>url</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
@@ -1867,16 +1880,16 @@ limit number of results per page. (default: 10, max: 50)
       <pre class="lines">
 
 
-141
 142
 143
 144
 145
 146
-147</pre>
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 142</span>
 
 <span class='def def kw'>def</span> <span class='trackbacks identifier id'>trackbacks</span><span class='lparen token'>(</span><span class='url identifier id'>url</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='results identifier id'>results</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/trackbacks.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:url</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='url identifier id'>url</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
@@ -1894,7 +1907,7 @@ limit number of results per page. (default: 10, max: 50)
       <div class="method_details ">
   <p class="signature " id="trending-instance_method">
   
-    - (<tt>Hashie::Mash</tt>) <strong>trending</strong>(options = {}) 
+    - (<tt><a href="Page.html" title="Topsy::Page">Topsy::Page</a></tt>) <strong>trending</strong>(options = {}) 
   
 
   
@@ -1973,7 +1986,7 @@ limit number of results per page. (default: 10, max: 50)
   
     <li>
       
-        <span class='type'>(<tt>Hashie::Mash</tt>)</span>
+        <span class='type'>(<tt><a href="Page.html" title="Topsy::Page">Topsy::Page</a></tt>)</span>
       
       
       
@@ -1988,13 +2001,13 @@ limit number of results per page. (default: 10, max: 50)
       <pre class="lines">
 
 
-155
 156
 157
-158</pre>
+158
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 156</span>
 
 <span class='def def kw'>def</span> <span class='trending identifier id'>trending</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='response identifier id'>response</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/trending.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
@@ -2064,13 +2077,13 @@ the url to look up
       <pre class="lines">
 
 
-164
 165
 166
-167</pre>
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'lib/topsy/client.rb', line 165</span>
 
 <span class='def def kw'>def</span> <span class='url_info identifier id'>url_info</span><span class='lparen token'>(</span><span class='url identifier id'>url</span><span class='rparen token'>)</span>
   <span class='response identifier id'>response</span> <span class='assign token'>=</span> <span class='handle_response identifier id'>handle_response</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>&quot;/urlinfo.json&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:query</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:url</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='url identifier id'>url</span><span class='rbrace token'>}</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
@@ -2087,7 +2100,7 @@ the url to look up
 </div>
     
     <div id="footer">
-  Generated on Wed Jan  6 10:31:57 2010 by 
+  Generated on Sat Jan  9 01:13:18 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
   0.5.2 (ruby-1.8.6).
 </div>

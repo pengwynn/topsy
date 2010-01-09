@@ -50,7 +50,10 @@
 
 <h2>Usage</h2>
 
-<pre class="code"><span class='rshft op'>&gt;&gt;</span> <span class='Topsy constant id'>Topsy</span><span class='dot token'>.</span><span class='author_info identifier id'>author_info</span><span class='lparen token'>(</span><span class='string val'>'http://twitter.com/barackobama'</span><span class='rparen token'>)</span>
+<pre class="code"><span class='rshft op'>&gt;&gt;</span> <span class='Topsy constant id'>Topsy</span><span class='dot token'>.</span><span class='rate_limit identifier id'>rate_limit</span>
+<span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lt op'>&lt;</span><span class='comment val'>#Topsy::RateLimitInfo limit=10000 remaining=10000 reset=1262804400&gt;</span>
+
+<span class='rshft op'>&gt;&gt;</span> <span class='Topsy constant id'>Topsy</span><span class='dot token'>.</span><span class='author_info identifier id'>author_info</span><span class='lparen token'>(</span><span class='string val'>'http://twitter.com/barackobama'</span><span class='rparen token'>)</span>
 <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lt op'>&lt;</span><span class='comment val'>#Topsy::Author description=&quot;44th President of the United States&quot; influence_level=10 name=&quot;Barack Obama&quot; nick=&quot;barackobama&quot; topsy_author_url=&quot;http://topsy.com/twitter/barackobama&quot; type=&quot;twitter&quot; url=&quot;http://twitter.com/barackobama&quot;&gt;</span>
 
 <span class='rshft op'>&gt;&gt;</span> <span class='Topsy constant id'>Topsy</span><span class='dot token'>.</span><span class='author_search identifier id'>author_search</span><span class='lparen token'>(</span><span class='string val'>'programming'</span><span class='rparen token'>)</span>
@@ -142,7 +145,7 @@ future version unintentionally.</li>
 <p>Copyright (c) 2010 <a href="http://wynnnetherland.com">Wynn Netherland</a>. See LICENSE for details.</p></div></div>
     
     <div id="footer">
-  Generated on Wed Jan  6 10:48:40 2010 by 
+  Generated on Sat Jan  9 01:13:14 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
   0.5.2 (ruby-1.8.6).
 </div>
