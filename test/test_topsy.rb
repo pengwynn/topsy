@@ -106,25 +106,46 @@ class TestTopsy < Test::Unit::TestCase
       results.list.first.url.should == "http://update.gemcutter.org/"
     end
     
-    should "return a page with a list of link search results for a query" do
-      stub_get("/search.json?q=NYE&window=m", "search.json")
-      results = Topsy.search("NYE", :window => :month)
-      results.class.should == Topsy::Page
-      results.total.should == 117731
-      results.page.should == 1
-      results.perpage.should == 10
-      results.window.should == :month
-      results.list.first.class.should == Topsy::LinkSearchResult
-      results.list.first.score.should == 4.70643044
-      results.list.first.trackback_permalink.should == "http://twitter.com/spin/status/5164154014"
-      results.list.first.hits.should == 397
-      results.list.first.trackback_total.should == 2268
-      results.list.first.topsy_trackback_url.should == "http://topsy.com/trackback?url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXGK84Poeynk"
-      results.list.first.url.should == "http://www.youtube.com/watch?v=XGK84Poeynk"
-      results.list.first.content.should == "Science, autotuned, with Sagan, Bill Nye, Tyson, Feynman http://bit.ly/2tDk4y win!"
-      results.list.first.title.should == "YouTube - Symphony of Science - 'We Are All Connected' (ft. Sagan, Feynman, deGrasse Tyson & Bill Nye)"
-      results.list.first.highlight.should == "Science, autotuned, with Sagan, Bill <span class=\"highlight-term\">Nye</span>, Tyson, Feynman http://bit.ly/2tDk4y win! " 
+    context "when searching" do
+      
+      should "handle string queries" do
+        stub_get("/search.json?q=NYE&window=m", "search.json")
+        results = Topsy.search("NYE", :window => :month)
+      end
+      
+      should "handle hash queries" do
+        stub_get("/search.json?q=site%3Athechangelog.com&window=h", "search.json")
+        results = Topsy.search(:site => 'thechangelog.com', :window => :hour)
+      end
+      
+      should "handle combined queries" do
+        stub_get("/search.json?q=riak%20site%3Athechangelog.com&window=h", "search.json")
+        results = Topsy.search('riak', :site => 'thechangelog.com', :window => :hour)
+      end
+      
+      should "return a page with a list of link search results for a query" do
+        stub_get("/search.json?q=NYE&window=m", "search.json")
+        results = Topsy.search("NYE", :window => :month)
+        results.class.should == Topsy::Page
+        results.total.should == 117731
+        results.page.should == 1
+        results.perpage.should == 10
+        results.window.should == :month
+        results.list.first.class.should == Topsy::LinkSearchResult
+        results.list.first.score.should == 4.70643044
+        results.list.first.trackback_permalink.should == "http://twitter.com/spin/status/5164154014"
+        results.list.first.hits.should == 397
+        results.list.first.trackback_total.should == 2268
+        results.list.first.topsy_trackback_url.should == "http://topsy.com/trackback?url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXGK84Poeynk"
+        results.list.first.url.should == "http://www.youtube.com/watch?v=XGK84Poeynk"
+        results.list.first.content.should == "Science, autotuned, with Sagan, Bill Nye, Tyson, Feynman http://bit.ly/2tDk4y win!"
+        results.list.first.title.should == "YouTube - Symphony of Science - 'We Are All Connected' (ft. Sagan, Feynman, deGrasse Tyson & Bill Nye)"
+        results.list.first.highlight.should == "Science, autotuned, with Sagan, Bill <span class=\"highlight-term\">Nye</span>, Tyson, Feynman http://bit.ly/2tDk4y win! " 
+      end
     end
+    
+    
+
 
     should "return search counts for a term" do
       stub_get("/searchcount.json?q=Balloon%20Boy", "searchcount.json")

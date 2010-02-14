@@ -58,7 +58,9 @@ module Topsy
       Topsy::LinkpostCount.new(count)
     end
     
-    # Returns list list of author profiles that match the query. The query is matched against the nick, name and biography information and the results are sorted by closeness of match and the influence of authors.
+    # Returns list list of author profiles that match the query. 
+    #   The query is matched against the nick, name and biography 
+    #   information and the results are sorted by closeness of match and the influence of authors.
     #
     # @param [String] q the search query string
     # @param [Hash] options method options
@@ -89,8 +91,15 @@ module Topsy
     # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :all all time
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
+    # @option options [String] :site narrow results to a domain
     # @return [Topsy::Page]
     def search(q, options={})
+      if q.is_a?(Hash)
+        options = q
+        q = "site:#{options.delete(:site)}" if options[:site]
+      else
+        q += " site:#{options.delete(:site)}" if options[:site]
+      end
       options[:window] = @@windows[options[:window]] if options[:window]
       results = handle_response(self.class.get("/search.json", :query => {:q => q}.merge(options)))
       Topsy::Page.new(results,Topsy::LinkSearchResult)
