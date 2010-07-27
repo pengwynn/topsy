@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.3.1 July 27, 2010
+* Patch from [notch8](http://github.com/notch8) for additional Page fields
+
 ### 0.2.1 February, 14, 2010
 
 * Added site: option to search method
