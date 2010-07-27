@@ -18,6 +18,9 @@ module Topsy
     property :perpage
     property :window
     property :topsy_trackback_url
+    property :last_offset
+    property :offset
+    property :hidden
     
     @@windows = {'a' => :all, 'auto' => :auto, 'w' => :week, 'd' => :day, 'm' => :month, 'h' => :hour}
     
