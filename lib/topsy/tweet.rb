@@ -11,14 +11,7 @@
 #
 module Topsy
   
-  class Tweet < Hashie::Dash
-    property :permalink_url
-    property :date
-    property :content
-    property :type
-    property :author
-    property :date_alpha
-    property :target
+  class Tweet < Hashie::Mash
     
     def to_s
       "Topsy Tweet: #{permalink_url}, #{content}"

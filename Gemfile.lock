@@ -1,0 +1,26 @@
+PATH
+  remote: .
+  specs:
+    topsy (0.3.2)
+      hashie (>= 0.1.3)
+      httparty (>= 0.4.5)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    crack (0.1.8)
+    hashie (0.4.0)
+    httparty (0.6.1)
+      crack (= 0.1.8)
+    jnunemaker-matchy (0.4.0)
+    shoulda (2.10.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  hashie (>= 0.1.3)
+  httparty (>= 0.4.5)
+  jnunemaker-matchy (~> 0.4.0)
+  shoulda (~> 2.10.0)
+  topsy!

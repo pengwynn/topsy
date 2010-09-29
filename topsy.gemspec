@@ -1,6 +1,4 @@
-require 'bundler'
-require 'bundler/version'
-require 'lib/topsy'
+require File.expand_path("../lib/topsy/version", __FILE__)
 
 Gem::Specification.new do |s|
   s.name = %q{topsy}
@@ -8,7 +6,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.required_rubygems_version = ">= 1.3.6"
   s.authors = ["Wynn Netherland", "Ernesto Tagwerker"]
-  s.date = %q{2010-07-27}
+  s.date = %q{2010-09-28}
   s.description = %q{Wrapper for the Topsy API}
   s.email = %q{wynn.netherland@gmail.com}
   s.files = Dir.glob("{lib}/**/*")
@@ -21,5 +19,11 @@ Gem::Specification.new do |s|
      "test/test_topsy.rb"
   ]
 
-  s.add_bundler_dependencies
+  s.add_dependency 'hashie', '>= 0.1.3'
+  s.add_dependency 'httparty', '>= 0.4.5'
+
+  s.add_development_dependency 'shoulda', '~> 2.10.0'
+  s.add_development_dependency 'jnunemaker-matchy', '~> 0.4.0'
+
+  
 end
