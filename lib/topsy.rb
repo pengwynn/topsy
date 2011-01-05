@@ -7,9 +7,6 @@ Hash.send :include, Hashie::HashExtensions
 
 
 module Topsy
-  
-  VERSION = "0.3.1"
-  
   class TopsyError < StandardError
     attr_reader :data
 
