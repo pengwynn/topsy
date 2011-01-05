@@ -206,9 +206,9 @@ module Topsy
       
       def get_rate_limit_status(response)
         headers = {
-          'limit' => response.headers['x-ratelimit-limit'].first.to_i,
-          'remaining' => response.headers['x-ratelimit-remaining'].first.to_i,
-          'reset' => response.headers['x-ratelimit-reset'].first.to_i
+          'limit' => response.headers['x-ratelimit-limit'].to_i,
+          'remaining' => response.headers['x-ratelimit-remaining'].to_i,
+          'reset' => response.headers['x-ratelimit-reset'].to_i
         }
         Topsy.rate_limit = Topsy::RateLimitInfo.new(headers)
       end
