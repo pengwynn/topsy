@@ -13,6 +13,7 @@ module Topsy
   
   class Page < Hashie::Dash
     property :total
+    property :trackback_total
     property :list
     property :page
     property :perpage
