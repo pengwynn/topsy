@@ -182,6 +182,7 @@ class TestTopsy < Test::Unit::TestCase
       results = Topsy.trackbacks("http://orrka.com")
       results.class.should == Topsy::Page
       results.total.should == 3
+      results.trackback_total.should == 3
       results.list.first.date.year.should == 2009
       results.list.first.permalink_url.should == "http://twitter.com/orrka/status/6435248067"
       results.list.first.date.should == Time.at(1260204073)
