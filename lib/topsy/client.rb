@@ -3,7 +3,7 @@ module Topsy
     include HTTParty
     format :json
     base_uri "http://otter.topsy.com"
-    @@windows = {:all => 'a', :auto => 'auto', :week => 'w', :day => 'd', :month => 'm', :hour => 'h'}
+    @@windows = {:all => 'a', :auto => 'auto', :week => 'w', :day => 'd', :month => 'm', :hour => 'h', :realtime => 'realtime'}
     
     # Returns info about API rate limiting
     #
