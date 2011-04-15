@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.3.4 January 9, 2011
+* Patch from [benbjohnson](http://github.com/benbjohnson) to add :realtime search window
+### 0.3.3 January 7, 2011
+* Patch from [benbjohnson](http://github.com/benbjohnson) to add trackback_total to search
 ### 0.3.2 September 28, 2010
 * Changed Tweet type from Dash to Mash
 * Bundler compatibility changes

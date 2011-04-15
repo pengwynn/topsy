@@ -7,9 +7,6 @@ Hash.send :include, Hashie::HashExtensions
 
 
 module Topsy
-  
-  VERSION = "0.3.1"
-  
   class TopsyError < StandardError
     attr_reader :data
 
@@ -98,7 +95,7 @@ module Topsy
   #
   # @param [String] q the search query string
   # @param [Hash] options method options
-  # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :all all time
+  # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :realtime, :all all time
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
   # @return [Topsy::Page]

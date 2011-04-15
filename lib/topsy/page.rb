@@ -6,6 +6,7 @@
 #      "list" : Array of Author instances
 #      "window" : Optional symbol
 #      "topsy_trackback_url" : String, optional 
+#      "trackback_total": 165, optional
 #
 # According to the official Topsy doc: http://code.google.com/p/otterapi/wiki/Resources?tm=6#/authorsearch
 #
@@ -13,6 +14,7 @@ module Topsy
   
   class Page < Hashie::Dash
     property :total
+    property :trackback_total
     property :list
     property :page
     property :perpage
