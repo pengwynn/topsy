@@ -204,10 +204,15 @@ module Topsy
         Hashie::Mash.new(response).response
       end
       
+      # extracts the header key
+      def extract_header_value(response, key)
+        response.headers[key].class == Array ? response.headers[key].first.to_i : response.headers[key].to_i 
+      end
+      
       def get_rate_limit_status(response)
-        limit = response.headers['x-ratelimit-limit'].respond_to?(:each) ? response.headers['x-ratelimit-limit'].first.to_i : response.headers['x-ratelimit-limit'].to_i 
-        remaining = response.headers['x-rateremaining-remaining'].respond_to?(:each) ? response.headers['x-rateremaining-remaining'].first.to_i : response.headers['x-rateremaining-remaining'].to_i
-        reset = response.headers['x-ratereset-reset'].respond_to?(:each) ? response.headers['x-ratereset-reset'].first.to_i : response.headers['x-ratereset-reset'].to_i
+        limit = extract_header_value(response,'x-ratelimit-limit')
+        remaining = extract_header_value(response,'x-ratelimit-remaining')
+        reset = extract_header_value(response,'x-ratelimit-reset')
         headers = {
           'limit' => limit,
           'remaining' => remaining,
