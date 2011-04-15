@@ -27,3 +27,6 @@ pkg
 ## PROJECT::SPECIFIC
 doc
 .yardoc
+
+## RUBINIUS
+*.rbc
