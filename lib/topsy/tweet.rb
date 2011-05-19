@@ -17,21 +17,23 @@ module Topsy
       "Topsy Tweet: #{permalink_url}, #{content}"
     end
 
-    def author=(value)
-      if value
-        self[:author] = Topsy::Author.new(value)  
-      else
-        self[:author] = value
+    def []=(property, value)
+      case property
+        when 'author' then
+          if value
+            self[:author] = Topsy::Author.new(value)  
+          else
+            self[:author] = value
+          end
+        when 'target' then
+          if value
+            self[:target] = Topsy::Target.new(value)  
+          else
+            self[:target] = value
+          end
+        else
+          super(property.to_s, value)
       end
     end
-    
-    def target=(value)
-      if value
-        self[:target] = Topsy::Target.new(value)  
-      else
-        self[:target] = value
-      end
-    end
-    
   end
 end

@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
      "test/test_topsy.rb"
   ]
 
-  s.add_dependency 'hashie', '~> 0.4.0'
+  s.add_dependency 'hashie', '~> 1.0.0'
   s.add_dependency 'httparty', '>= 0.4.5'
 
   s.add_development_dependency 'shoulda', '~> 2.11.3'
