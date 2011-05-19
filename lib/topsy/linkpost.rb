@@ -20,13 +20,17 @@ module Topsy
       "Topsy Linkpost: #{permalink_url}, @#{content}"
     end
     
-    def target=(value)
-      if value
-        self[:target] = Topsy::Target.new(value)  
-      else
-        self[:target] = value
+    def []=(property, value)
+      case property
+        when 'target' then
+          if value
+            self[:target] = Topsy::Target.new(value)  
+          else
+            self[:target] = value
+          end
+        else
+          super(property.to_s, value)
       end
     end
-    
   end
 end
