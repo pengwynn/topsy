@@ -29,9 +29,9 @@ module Topsy
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
     # @return [Hashie::Mash]
-    def author_search(q, options={})
+    def experts(q, options={})
       options[:window] = @@windows[options[:window]] if options[:window]
-      handle_response(self.class.get("/authorsearch.json", :query => {:q => q}.merge(options)))
+      handle_response(self.class.get("/experts.json", :query => {:q => q}.merge(options)))
     end
     
     # Returns list of URLs posted by an author
@@ -57,21 +57,7 @@ module Topsy
       count = handle_response(self.class.get("/linkpostcount.json", :query => {:url => url}.merge(options)))
       Topsy::LinkpostCount.new(count)
     end
-    
-    # Returns list list of author profiles that match the query. 
-    #   The query is matched against the nick, name and biography 
-    #   information and the results are sorted by closeness of match and the influence of authors.
-    #
-    # @param [String] q the search query string
-    # @param [Hash] options method options
-    # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
-    # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
-    # @return [Topsy::Page]
-    def profile_search(q, options={})
-      results = handle_response(self.class.get("/profilesearch.json", :query => {:q => q}.merge(options)))
-      Topsy::Page.new(results,Topsy::Author)
-    end
-    
+
     # Returns list of URLs related to a given URL
     #
     # @param [String] url URL string for the author.

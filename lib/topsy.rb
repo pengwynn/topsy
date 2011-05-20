@@ -41,8 +41,8 @@ module Topsy
   # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
   # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
   # @return [Topsy::Page]
-  def self.author_search(q, options={})
-    result = Topsy::Client.new.author_search(q, options)
+  def self.experts(q, options={})
+    result = Topsy::Client.new.experts(q, options)
     Topsy::Page.new(result, Topsy::Author)
   end
   
