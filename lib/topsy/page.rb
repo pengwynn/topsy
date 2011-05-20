@@ -35,22 +35,24 @@ module Topsy
       super(content)
     end
     
-    def list=(value)
-      result = []
-      if value
-        value.each{ |x| result << @klass.new(x) }
-        self[:list] = result  
-      else
-        self[:list] = value
+    def []=(property, value)
+      case property
+        when 'list' then
+          result = []
+          if value
+            value.each{ |x| result << @klass.new(x) }
+            self[:list] = result  
+          else
+            self[:list] = value
+          end
+        when 'window' then
+          if value
+            self[:window] = @@windows[value]  
+          end
+        else
+          super(property.to_s, value)
       end
     end
-    
-    def window=(value)
-      if value
-        self[:window] = @@windows[value]  
-      end
-    end
-    
   end
  
 end
