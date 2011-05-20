@@ -15,10 +15,10 @@ Topsy is hosted on Gemcutter, so:
     >> Topsy.author_info('http://twitter.com/barackobama')
     => <#Topsy::Author description="44th President of the United States" influence_level=10 name="Barack Obama" nick="barackobama" topsy_author_url="http://topsy.com/twitter/barackobama" type="twitter" url="http://twitter.com/barackobama">
 
-    >> Topsy.author_search('programming')
+    >> Topsy.experts('programming')
     => <#Topsy::Page list=[<#Topsy::Author descript ... ] page=1 perpage=15 topsy_trackback_url=nil total=97229 window=nil>
     
-    >> Topsy.author_search('programming', :perpage => 2, :page => 1)
+    >> Topsy.experts('programming', :perpage => 2, :page => 1)
     => <#Topsy::Page list=[<#Topsy::Author description="Most ... ] page=1 perpage=2 topsy_trackback_url=nil total=100685 window=nil>
     
     >> Topsy.link_posts('http://twitter.com/barackobama', :perpage => 2, :page => 2)
@@ -47,12 +47,6 @@ Topsy is hosted on Gemcutter, so:
     
     >> Topsy.search_count('rock')
     => <#Topsy::SearchCounts a=5191790 d=7601 h=206 m=216179 w=45462>
-    
-    >> Topsy.profile_search('Hacker+Rubyist')
-    => <#Topsy::Page list=[<#Topsy::Author description="Hacker; Rubyist; Bit Poet" influence_level=4 name="Ben Bleythi ...">] page=1 perpage=10 topsy_trackback_url=nil total=5 window=nil>
-     
-    >> Topsy.profile_search('Hacker+Rubyist', :perpage => 1, :page => 2)
-    => <#Topsy::Page list=[<#Topsy::Author description="Rubyist, hacker, gamer (video, board and role-playing)... ">] page=2 perpage=1 topsy_trackback_url=nil total=5 window=nil>
     
     >> Topsy.related('http://www.twitter.com')
     => <#Topsy::Page list=[<#Topsy::LinkSearchResult title="New Twitter Feature: Body Counts | Danger Room ... ">] page=1 perpage=10 topsy_trackback_url=nil total=4458 window=nil>
