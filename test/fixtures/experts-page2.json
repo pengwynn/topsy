@@ -1,16 +1,16 @@
 {
     "request": {
         "response_type": "json",
-        "resource": "authorsearch",
+        "resource": "experts",
         "parameters": {
             "q": "pengwynn"
         },
-        "url": "http://button.topsy.com/authorsearch.json?q=pengwynn"
+        "url": "http://button.topsy.com/experts.json?q=pengwynn"
     },
     "response": {
-        "page": 1,
-        "total": 491,
-        "perpage": 15,
+        "page": 2,
+        "total": 512,
+        "perpage": 10,
         "list": [{
             "name": "Bradley Joyce",
             "nick": "bradleyjoyce",
@@ -110,56 +110,6 @@
             "hits": 11,
             "url": "http://twitter.com/adamstac",
             "topsy_author_url": "http://topsy.com/twitter/adamstac"
-        },
-        {
-            "name": "Rupak Ganguly",
-            "nick": "rupakg",
-            "photo_url": "http://a3.twimg.com/profile_images/469869723/twitterProfilePhoto_normal.jpg",
-            "description": "RoR freelancer. .NET architect. Love C#. Rails Magazine Editor.",
-            "influence_level": "1",
-            "hits": 9,
-            "url": "http://twitter.com/rupakg",
-            "topsy_author_url": "http://topsy.com/twitter/rupakg"
-        },
-        {
-            "name": "cglee",
-            "nick": "cglee",
-            "photo_url": "http://s.twimg.com/a/1253209888/images/default_profile_4_normal.png",
-            "description": "Rails developer",
-            "influence_level": "1",
-            "hits": 9,
-            "url": "http://twitter.com/cglee",
-            "topsy_author_url": "http://topsy.com/twitter/cglee"
-        },
-        {
-            "name": "DarthMolen",
-            "nick": "darthmolen",
-            "photo_url": "http://a3.twimg.com/profile_images/53887999/avatar_12_normal.gif",
-            "description": "MMA Radio Show Co-Host &quot;The No Holds Barred Show&quot;",
-            "influence_level": "8",
-            "hits": 6,
-            "url": "http://twitter.com/darthmolen",
-            "topsy_author_url": "http://topsy.com/twitter/darthmolen"
-        },
-        {
-            "name": "Chris Eppstein",
-            "nick": "chriseppstein",
-            "photo_url": "http://a1.twimg.com/profile_images/51769630/Photo_5_normal.jpg",
-            "description": "Father, Software Engineer, Drinker of Beer",
-            "influence_level": "4",
-            "hits": 8,
-            "url": "http://twitter.com/chriseppstein",
-            "topsy_author_url": "http://topsy.com/twitter/chriseppstein"
-        },
-        {
-            "name": "Squeejee",
-            "nick": "squeejeeinc",
-            "photo_url": "http://a3.twimg.com/profile_images/69807891/tool_normal.png",
-            "description": "Ruby on Rails Developers, Entrepreneurs, Builders",
-            "influence_level": "3",
-            "hits": 7,
-            "url": "http://twitter.com/squeejeeinc",
-            "topsy_author_url": "http://topsy.com/twitter/squeejeeinc"
         }]
     }
 }

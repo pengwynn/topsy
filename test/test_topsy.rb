@@ -37,8 +37,8 @@ class TestTopsy < Test::Unit::TestCase
     end
     
     should "return a page with a list of authors for the search" do
-      stub_get("/authorsearch.json?q=pengwynn", "authorsearch.json")
-      results = Topsy.author_search("pengwynn")
+      stub_get("/experts.json?q=pengwynn", "experts.json")
+      results = Topsy.experts("pengwynn")
       results.class.should == Topsy::Page
       results.total.should == 491
       results.list.first.class.should == Topsy::Author
@@ -46,8 +46,8 @@ class TestTopsy < Test::Unit::TestCase
     end
     
     should "return the second page of an author search with a list of 10 authors" do
-      stub_get("/authorsearch.json?q=pengwynn&page=2&perpage=10", "authorsearch-page2.json")
-      results = Topsy.author_search("pengwynn", :page => 2, :perpage => 10)
+      stub_get("/experts.json?q=pengwynn&page=2&perpage=10", "experts-page2.json")
+      results = Topsy.experts("pengwynn", :page => 2, :perpage => 10)
       results.class.should == Topsy::Page
       results.total.should == 512
       results.perpage.should == 10
@@ -84,16 +84,7 @@ class TestTopsy < Test::Unit::TestCase
       counts.all.should == 1004
       counts.contains.should == 0
     end
-    
-    should "return a page with a list of authors that match the query." do
-      stub_get("/profilesearch.json?q=pengwynn", "profilesearch.json")
-      results = Topsy.profile_search("pengwynn")
-      results.class.should == Topsy::Page
-      results.total.should == 1
-      results.list.first.class.should == Topsy::Author
-      results.list.first.influence_level.should == 10
-    end
-    
+        
     should "return a page with a list of URLs related to a given URL" do
       stub_get("/related.json?url=http%3A%2F%2Fgemcutter.org", "related.json")
       results = Topsy.related("http://gemcutter.org")
