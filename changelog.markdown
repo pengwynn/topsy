@@ -1,5 +1,7 @@
 # Changelog
-
+### 0.3.5 May 20, 2011
+* Patch from @benbjohnson, upgrade to Hashie 1.0.0
+* Patch from @eichert12, removed deprecated profilesearch, renamed author_search to experts to match the Otter API
 ### 0.3.4 January 9, 2011
 * Patch from [benbjohnson](http://github.com/benbjohnson) to add :realtime search window
 ### 0.3.3 January 7, 2011
