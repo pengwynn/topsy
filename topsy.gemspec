@@ -26,5 +26,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mocha', '~> 0.9.10'
   s.add_development_dependency 'fakeweb', '~> 1.3.0'
   s.add_development_dependency 'jnunemaker-matchy', '~> 0.4.0'
-  s.add_development_dependency 'redgreen', '~> 1.2.2'
 end
