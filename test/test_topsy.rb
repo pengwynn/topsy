@@ -109,6 +109,16 @@ class TestTopsy < Test::Unit::TestCase
         results = Topsy.search(:site => 'thechangelog.com', :window => :hour)
       end
       
+      should "handle hash queries with explicit window" do
+        stub_get("/search.json?q=site%3Athechangelog.com&window=h3", "search.json")
+        results = Topsy.search(:site => 'thechangelog.com', :window => 'h3')
+      end
+      
+      should "handle hash queries with explicit window with undefined terms" do
+        stub_get("/search.json?q=site%3Athechangelog.com&window=dynamic", "search.json")
+        results = Topsy.search(:site => 'thechangelog.com', :window => :dynamic)
+      end
+      
       should "handle combined queries" do
         stub_get("/search.json?q=riak%20site%3Athechangelog.com&window=h", "search.json")
         results = Topsy.search('riak', :site => 'thechangelog.com', :window => :hour)
