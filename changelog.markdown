@@ -1,4 +1,8 @@
 # Changelog
+### 0.5.0 December 23, 2011
+* Patch from @scottwater for date window changes
+### 0.4.0 December 23, 2011
+* Patch from @scottwater for 1.9.x fixes
 ### 0.3.6 May 20, 2011
 * Patch from @benbjohnson, upgrade to Hashie 1.0.0
 * Patch from @eichert12, removed deprecated profilesearch, renamed author_search to experts to match the Otter API
