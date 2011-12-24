@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency 'hashie', '~> 1.0.0'
-  s.add_dependency 'httparty', '>= 0.4.5'
+  s.add_dependency 'httparty', '>= 0.8.1'
 
   s.add_development_dependency 'shoulda', '~> 2.11.3'
   s.add_development_dependency 'mocha', '~> 0.9.10'
