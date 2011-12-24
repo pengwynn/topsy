@@ -20,11 +20,10 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency 'hashie', '~> 1.0.0'
-  s.add_dependency 'httparty', '>= 0.4.5'
+  s.add_dependency 'httparty', '>= 0.8.1'
 
   s.add_development_dependency 'shoulda', '~> 2.11.3'
   s.add_development_dependency 'mocha', '~> 0.9.10'
   s.add_development_dependency 'fakeweb', '~> 1.3.0'
   s.add_development_dependency 'jnunemaker-matchy', '~> 0.4.0'
-  s.add_development_dependency 'redgreen', '~> 1.2.2'
 end
