@@ -3,7 +3,7 @@ module Topsy
     include HTTParty
     format :json
     base_uri "http://otter.topsy.com"
-    @@windows = {:all => 'a', :auto => 'auto', :week => 'w', :day => 'd', :month => 'm', :hour => 'h', :realtime => 'realtime'}
+    @@windows = {:all => 'a', :week => 'w', :day => 'd', :month => 'm', :hour => 'h', :realtime => 'realtime'}
     
     # Returns info about API rate limiting
     #
@@ -25,12 +25,12 @@ module Topsy
     #
     # @param [String] q the search query string
     # @param [Hash] options method options
-    # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :all all time
+    # @option options [Symbol] :window Time window for results. (default: :all) Options: :dynamic most relevant, :hour last hour, :day last day, :week last week, :month last month, :all all time. You can also use the h6 (6 hours) d3 (3 days) syntax. 
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
     # @return [Hashie::Mash]
     def experts(q, options={})
-      options[:window] = @@windows[options[:window]] if options[:window]
+      options = set_window_or_default(options)
       handle_response(self.class.get("/experts.json", :query => {:q => q}.merge(options)))
     end
     
@@ -74,7 +74,7 @@ module Topsy
     #
     # @param [String] q the search query string
     # @param [Hash] options method options
-    # @option options [Symbol] :window Time window for results. (default: :auto) Options: :auto - automatically pick the most recent and relevant window. :hour last hour, :day last day, :week last week, :month last month, :all all time
+    # @option options [Symbol] :window Time window for results. (default: :all) Options: :dynamic most relevant, :hour last hour, :day last day, :week last week, :month last month, :all all time. You can also use the h6 (6 hours) d3 (3 days) syntax. 
     # @option options [Integer] :page page number of the result set. (default: 1, max: 10)
     # @option options [Integer] :perpage limit number of results per page. (default: 10, max: 50)
     # @option options [String] :site narrow results to a domain
@@ -86,7 +86,7 @@ module Topsy
       else
         q += " site:#{options.delete(:site)}" if options[:site]
       end
-      options[:window] = @@windows[options[:window]] if options[:window]
+      options = set_window_or_default(options)
       results = handle_response(self.class.get("/search.json", :query => {:q => q}.merge(options)))
       Topsy::Page.new(results,Topsy::LinkSearchResult)
     end
@@ -163,6 +163,11 @@ module Topsy
     end
 
     private
+    
+      def set_window_or_default(options)
+        options[:window] = @@windows[options[:window]] if options[:window] && @@windows[options[:window]]
+        options
+      end
 
       def handle_response(response)
         raise_errors(response)
