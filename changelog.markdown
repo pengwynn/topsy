@@ -1,4 +1,6 @@
 # Changelog
+### 0.5.1 January 4, 2012
+* Patch from @scottwater to bump Hashie
 ### 0.5.0 December 23, 2011
 * Patch from @scottwater for date window changes
 ### 0.4.0 December 23, 2011
