@@ -1,4 +1,6 @@
 # Changelog
+### 0.6.0 January 8, 2013
+* Patch from @[Holler][] for `#search_histogram`
 ### 0.5.1 January 4, 2012
 * Patch from @scottwater to bump Hashie
 ### 0.5.0 December 23, 2011
@@ -33,3 +35,5 @@
 ### 0.1.0 January 1, 2010
 
 * Initial version
+
+[Holler]: https://github.com/Holler
