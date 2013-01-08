@@ -28,7 +28,7 @@ module Topsy
     #
     # @return [Topsy::RateLimitInfo]
     def credit
-      handle_response(self.class.get("/credit.json"))
+      handle_response(get("/credit.json"))
     end
     
     # Returns Profile information for an author (a twitter profile indexed by Topsy). The response contains the name, description (biography) and the influence level of the author
