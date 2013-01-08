@@ -128,7 +128,7 @@ module Topsy
     # @param [Integer] slice - 
     # @param [Integer] period -
     # 
-    def search_histogram( q , count_method , slice = 86400 , period = 30  )
+    def search_histogram( q , count_method = 'target' , slice = 86400 , period = 30  )
       response = handle_response(get("/searchhistogram.json" , :query => { :q => q , :slice => slice , :period => period , :count_method => count_method } ))
       Topsy::SearchHistogram.new(response)
     end
