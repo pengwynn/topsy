@@ -215,6 +215,40 @@ class TestTopsy < Test::Unit::TestCase
       results.description.should == "Social networking"
       results.description_attribution.should == "From DMOZ"
     end
+
+    context "#searchhistogram" do
+      context "citations" do
+        context "for domain" do
+          stub_get("/searchhistogram.json?q=site%3Abuzzfeed.com&slice=86400&period=30&count_method=citation", "searchhistogram-citation.json")
+          results = Topsy.search_histogram( 'site:buzzfeed.com' , "citation" , 86400 , 30 )
+          results.class.should == Topsy::SearchHistogram
+          results.period.should == 30
+          results.slice.should == 86400
+          results.count_method.should == "citation"
+          results.histogram.should == [21024,10386,7270,12722,15993,17522,10517,8899,10363,11491,11729,16262,12940,8800,7589,8275,8692,14924,25927,30728,24562,22369,19203,33483,15497,11527,11814,11893,13998,7268]
+        end
+
+        context "for user account" do
+          stub_get("/searchhistogram.json?q=%40garyvee&slice=86400&period=30&count_method=citation", "searchhistogram-mention-citation.json")
+          results = Topsy.search_histogram( '@garyvee' , "citation" , 86400 , 30 )
+          results.class.should == Topsy::SearchHistogram
+          results.period.should == 30
+          results.slice.should == 86400
+          results.count_method.should == "citation"
+          results.histogram.should == [69,77,279,117,143,186,123,49,75,75,173,167,58,42,46,40,64,186,94,166,96,146,106,51,42,101,89,69,209,78]
+        end
+
+        context "for keyword" do
+          stub_get("/searchhistogram.json?q=apple&slice=86400&period=30&count_method=citation", "searchhistogram-keyword-citation.json")
+          results = Topsy.search_histogram( 'apple' , "citation" , 86400 , 30 )
+          results.class.should == Topsy::SearchHistogram
+          results.period.should == 30
+          results.slice.should == 86400
+          results.count_method.should == "citation"
+          results.histogram.should == [249615,206548,161825,199043,267041,356657,303621,175584,166839,167086,197773,281216,234291,194937,162997,177703,167064,250086,300637,318948,361341,382810,254625,169622,203973,418762,550058,347752,370830,315412]
+        end
+      end
+    end
   end
   
 end

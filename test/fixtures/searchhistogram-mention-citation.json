@@ -1,0 +1,17 @@
+{
+	"request":{
+		"parameters":{
+			"q":"@garyvee",
+			"count_method":"citation"
+		},
+		"response_type":"json",
+		"resource":"searchhistogram",
+		"url":"http://otter.topsy.com/searchhistogram.json?count_method=citation&q=%40garyvee"
+	},
+	"response":{
+		"histogram":[69,77,279,117,143,186,123,49,75,75,173,167,58,42,46,40,64,186,94,166,96,146,106,51,42,101,89,69,209,78],
+		"period":30,
+		"count_method":"citation",
+		"slice":86400
+	}
+}

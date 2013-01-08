@@ -110,6 +110,17 @@ module Topsy
   def self.search_count(q)
     Topsy::Client.new.search_count(q)
   end
+
+  # Returns data on the volume of tweets 
+  # 
+  # @param [String] the query
+  # @params [String] what is being counted - "target" (default) -  the number of unique links , or "citation" - cthe number of unique tweets about links
+  # @params [Integer] The number of seconds for each slice ( default: 86400 = 1 day )
+  # @params [Integer] The number of slices (default 30 = 1 month)
+  # @return [Topsy::SearchHistogram]
+  def self.search_histogram( query , count_method = "target" , slice = 86400 , period = 30 )
+    Topsy::Client.new.search_histogram( query , count_method , slice , period  )
+  end
   
   # Returns counts of tweets for a URL
   #
@@ -191,6 +202,7 @@ require File.join(directory, 'topsy', 'link_search_result')
 require File.join(directory, 'topsy', 'linkpost_count')
 require File.join(directory, 'topsy', 'page')
 require File.join(directory, 'topsy', 'search_counts')
+require File.join(directory, 'topsy', 'search_histogram')
 require File.join(directory, 'topsy', 'stats')
 require File.join(directory, 'topsy', 'target')
 require File.join(directory, 'topsy', 'tag')
