@@ -2,7 +2,6 @@ require 'topsy/default'
 module Topsy
   module Configurable
     attr_writer :api_key
-    attr_accessor :endpoint, :connection_options, :middleware, :access_token_key
 
     class << self
 
