@@ -4,7 +4,17 @@ module Topsy
     format :json
     base_uri "http://otter.topsy.com"
     @@windows = {:all => 'a', :week => 'w', :day => 'd', :month => 'm', :hour => 'h', :realtime => 'realtime'}
-    
+
+    # topsy client modules
+    include Topsy::Configurable
+
+    def initialize( options = {} )
+      setup
+      Topsy::Configurable.keys.each do |key|
+        instance_variable_set(:"@#{key}", options[key] || instance_variable_get(:"@#{key}"))
+      end
+    end
+
     # Returns info about API rate limiting
     #
     # @return [Topsy::RateLimitInfo]
@@ -31,7 +41,8 @@ module Topsy
     # @return [Hashie::Mash]
     def experts(q, options={})
       options = set_window_or_default(options)
-      handle_response(self.class.get("/experts.json", :query => {:q => q}.merge(options)))
+      result = handle_response(self.class.get("/experts.json", :query => {:q => q}.merge(options)))
+      Topsy::Page.new(result, Topsy::Author)
     end
     
     # Returns list of URLs posted by an author
@@ -107,7 +118,7 @@ module Topsy
     # @param [Integer] slice - 
     # @param [Integer] period -
     # 
-    def search_histogram( q , count_method , slice , period  )
+    def search_histogram( q , count_method , slice = 86400 , period = 30  )
       response = handle_response(self.class.get("/searchhistogram.json" , :query => { :q => q , :slice => slice , :period => period , :count_method => count_method } ))
       Topsy::SearchHistogram.new(response)
     end

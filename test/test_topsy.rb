@@ -1,7 +1,18 @@
 require 'helper'
 
 class TestTopsy < Test::Unit::TestCase
-  
+  # context "when initializing Topsy client" do
+  #   context "without API key" do
+
+  #   end
+
+  #   context "with API key" do
+  #     should "set the value of @api_key to passed value" do
+  #       Topsy::Client.new(  )
+  #     end
+  #   end
+  # end
+
   context "when hitting the Otter API" do
     
     should "return rate limit information when calling credit" do
