@@ -1,3 +1,4 @@
+require 'topsy/configurable'
 module Topsy
   class Client
     include HTTParty
