@@ -99,6 +99,18 @@ module Topsy
       counts = handle_response(self.class.get("/searchcount.json", :query => {:q => q}))
       Topsy::SearchCounts.new(counts)
     end
+
+    # Returns mention count data for the given query
+    # 
+    # @param [String] q - The query.  Use site:domain.com to get domain counts and @username to get mention counts.
+    # @param [String] count_method - what is being counted - "target" (default) -  the number of unique links , or "citation" - cthe number of unique tweets about links
+    # @param [Integer] slice - 
+    # @param [Integer] period -
+    # 
+    def search_histogram( q , count_method , slice , period  )
+      response = handle_response(self.class.get("/searchhistogram.json" , :query => { :q => q , :slice => slice , :period => period , :count_method => count_method } ))
+      Topsy::SearchHistogram.new(response)
+    end
     
     # Returns counts of tweets for a URL
     #
