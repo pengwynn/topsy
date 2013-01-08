@@ -1,0 +1,17 @@
+{
+	"request":{
+		"parameters":{
+			"q":"apple",
+			"count_method":"citation"
+		},
+		"response_type":"json",
+		"resource":"searchhistogram",
+		"url":"http://otter.topsy.com/searchhistogram.json?count_method=citation&q=apple"
+	},
+	"response":{
+		"histogram":[249615,206548,161825,199043,267041,356657,303621,175584,166839,167086,197773,281216,234291,194937,162997,177703,167064,250086,300637,318948,361341,382810,254625,169622,203973,418762,550058,347752,370830,315412],
+		"period":30,
+		"count_method":"citation",
+		"slice":86400
+	}
+}
