@@ -1,6 +1,7 @@
 require 'helper'
 
 class TestTopsy < Test::Unit::TestCase
+  
   context "when initializing Topsy client" do
     context "with API key" do
       should "append api_key to all requests" do
