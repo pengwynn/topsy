@@ -1,6 +1,5 @@
 require 'hashie'
 require 'httparty'
-require 'topsy/configurable'
 
 directory = File.expand_path(File.dirname(__FILE__))
 Dir[directory + '/topsy/*.rb'].each{ |f| require f unless f =~ /version/ }
