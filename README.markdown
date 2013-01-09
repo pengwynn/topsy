@@ -9,6 +9,12 @@ Topsy is hosted on Gemcutter, so:
     sudo gem install topsy
 
 ## Usage
+
+    # grab your API key from http://manage.topsy.com/app/
+    Topsy.configure do |config|
+      config.api_key = "ENTER-YOUR-KEY"
+    end
+
     >> Topsy.rate_limit
     => <#Topsy::RateLimitInfo limit=10000 remaining=10000 reset=1262804400>
 
@@ -17,69 +23,69 @@ Topsy is hosted on Gemcutter, so:
 
     >> Topsy.experts('programming')
     => <#Topsy::Page list=[<#Topsy::Author descript ... ] page=1 perpage=15 topsy_trackback_url=nil total=97229 window=nil>
-    
+
     >> Topsy.experts('programming', :perpage => 2, :page => 1)
     => <#Topsy::Page list=[<#Topsy::Author description="Most ... ] page=1 perpage=2 topsy_trackback_url=nil total=100685 window=nil>
-    
+
     >> Topsy.link_posts('http://twitter.com/barackobama', :perpage => 2, :page => 2)
     => <#Topsy::Page list=[<#Topsy::Linkpost content="An important reminder ... ] page=2 perpage=2 topsy_trackback_url=nil total=402 window=nil>
 
     >> Topsy.link_posts('http://twitter.com/barackobama')
     => <#Topsy::Page list=[<#Topsy::Linkpost content="An important reminder about health reform on the @Whit... ] page=1 perpage=10 topsy_trackback_url=nil total=402 window=nil>
-    
+
     >> Topsy.link_post_count('http://twitter.com/barackobama')
     => <#Topsy::LinkpostCount all=402 contains=0>
 
     >> Topsy.url_info('http://etagwerker.com')
-    => <#Topsy::UrlInfo description="" description_attribution="" oneforty="just finished installing wordpress in a linux .." url="http://etagwerker.com/"> 
-    
+    => <#Topsy::UrlInfo description="" description_attribution="" oneforty="just finished installing wordpress in a linux .." url="http://etagwerker.com/">
+
     >> Topsy.stats('http://www.google.com')
     => <#Topsy::Stats all=29869 contains=0 influential=2023 topsy_trackback_url="http://topsy.com/tb/www.google.com/">
 
     >> Topsy.search('rock')
-    => <#Topsy::Page list=[<#Topsy::LinkSearchResult content="Why 30 Rock is a Rip-Off of The Muppet Show - http://is.gd/15KJZ" .. ]  page=1 perpage=10 topsy_trackback_url=nil total=714429 window="a"> 
-    
+    => <#Topsy::Page list=[<#Topsy::LinkSearchResult content="Why 30 Rock is a Rip-Off of The Muppet Show - http://is.gd/15KJZ" .. ]  page=1 perpage=10 topsy_trackback_url=nil total=714429 window="a">
+
     >> Topsy.search('rock', :perpage => 2, :page => 3)
     => <#Topsy::Page list=[<#Topsy::LinkSearchResult content="Just released! Beatles Rock Band opening cinematic. Amaz ..." ] page=3 perpage=2 topsy_trackback_url=nil total=714429 window="a">
-    
+
     >> Topsy.search('rock', :perpage => 2, :page => 3, :window => 'd')
     => <#Topsy::Page list=[<#Topsy::LinkSearchResult content="Be a Google Wave Rock Star http://ff.im/-dPdGL" highlight="Be a .. "] page=3 perpage=2 topsy_trackback_url=nil total=6064 window="d">
-    
+
     >> Topsy.search_count('rock')
     => <#Topsy::SearchCounts a=5191790 d=7601 h=206 m=216179 w=45462>
-    
+
     >> Topsy.related('http://www.twitter.com')
     => <#Topsy::Page list=[<#Topsy::LinkSearchResult title="New Twitter Feature: Body Counts | Danger Room ... ">] page=1 perpage=10 topsy_trackback_url=nil total=4458 window=nil>
-     
+
     >> Topsy.tags('http://twitter.com')
     => <#Topsy::Page list=[<#Topsy::Tag name="current" url="http://topsy.com/s?q=current">, <#Topsy::Tag name="twe ... ">] page=1 perpage=10 topsy_trackback_url=nil total=1885 window=nil>
-    
+
     >> Topsy.trending
     => <#Topsy::Page list=[<#Topsy::Trend term="u s reopens embassy in yemen" url="http://topsy.com/s?q=u+s%20r ... ">] page=1 perpage=10 topsy_trackback_url=nil total=1434 window=nil>
-    
+
     >> Topsy.trending(:page => 3, :perpage => 2)
     => <#Topsy::Page list=[<#Topsy::Trend term="droid vs iphone" url="http://topsy.com/s?q=droid+vs%20iphone" ... ">] page=3 perpage=2 topsy_trackback_url=nil total=1434 window=nil>
 
     >> Topsy.trackbacks('http://twitter.com', :perpage => 2, :page => 2)
     => <#Topsy::Page list=[<#Topsy::Tweet author=<#Topsy::Author influence_level=8 name="tama" photo_url="http://a3.twimg .. ">] page=2 perpage=2 topsy_trackback_url="http://topsy.com/tb/twitter.com/" total=39705 window=nil>
-    
+
     >> Topsy.trackbacks('http://twitter.com', :perpage => 2, :page => 2, :contains => 'mashable')
     => <#Topsy::Page list=[<#Topsy::Tweet author=<#Topsy::Author name="Hannah Grosvenor" photo_url="http://a1.t. ... >] page=2 perpage=2 topsy_trackback_url="http://topsy.com/tb/twitter.com/" total=41 window=nil>
-    
+
     # Fetch search results for the query "gemcutter"
     >> results = Topsy.search("gemcutter")
     => <#Topsy::Page list=[<#Topsy::LinkSearchResult content="New design ... ]>
-    
+
     # Fetch search counts for the query "gemcutter"
     >> counts = Topsy.search_count("gemcutter")
     => <#Topsy::SearchCounts a=773 d=6 h=0 m=103 w=24>
     >> counts.this_week
     => 24
-    
+
 Check the [full gem documentation](http://yardoc.org/docs/pengwynn-topsy) and [API docs](http://code.google.com/p/otterapi/wiki/Resources) for more info.
 
 ## Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
