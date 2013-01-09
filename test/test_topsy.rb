@@ -2,6 +2,16 @@ require 'helper'
 
 class TestTopsy < Test::Unit::TestCase
   
+  context "when initializing Topsy client" do
+    context "with API key" do
+      should "append api_key to all requests" do
+        client = Topsy::Client.new( { :api_key => "abcdefg123456" } )
+        stub_get("/search.json?q=NYE&window=m&apikey=abcdefg123456", "search.json")
+        client.search("NYE", :window => :month)
+      end
+    end
+  end
+
   context "when hitting the Otter API" do
     
     should "return rate limit information when calling credit" do
@@ -12,8 +22,6 @@ class TestTopsy < Test::Unit::TestCase
     end
     
     should "return rate limit information with every request" do
-
-      # FakeWeb.register_uri(:get, "http://otter.topsy.com/authorinfo.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", headers)
       stub_get("/authorinfo.json?url=http%3A%2F%2Ftwitter.com%2Fpengwynn", "authorinfo.json")
       
       info = Topsy.author_info("http://twitter.com/pengwynn")
