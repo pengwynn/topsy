@@ -6,7 +6,7 @@ class TestTopsy < Test::Unit::TestCase
     context "with API key" do
       should "append api_key to all requests" do
         client = Topsy::Client.new( { :api_key => "abcdefg123456" } )
-        stub_get("/search.json?q=NYE&window=m&api_key=abcdefg123456", "search.json")
+        stub_get("/search.json?q=NYE&window=m&apikey=abcdefg123456", "search.json")
         client.search("NYE", :window => :month)
       end
     end

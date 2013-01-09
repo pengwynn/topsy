@@ -13,7 +13,7 @@ module Topsy
       if @api_key.length > 0 
         # Handle appending the api key
         opts[:query] = {} unless opts.has_key?(:query)
-        opts[:query].merge!( { :api_key => options[:api_key] } )
+        opts[:query].merge!( { :apikey => options[:api_key] } )
       end
       self.class.get( path , opts )
     end
