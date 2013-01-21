@@ -2,7 +2,7 @@ require 'hashie'
 require 'httparty'
 
 directory = File.expand_path(File.dirname(__FILE__))
-Dir[directory + '/topsy/*.rb'].each{ |f| require f unless f =~ /version/ }
+Dir[directory + '/topsy/*.rb'].each{ |f| require f unless f =~ /version\.rb$/ }
 
 Hash.send :include, Hashie::HashExtensions
 
@@ -20,10 +20,10 @@ module Topsy
       self.credit if @rate_limit_info.nil?
       @rate_limit_info
     end
-    
+
     def rate_limit=(info)
       @rate_limit_info = Topsy::RateLimitInfo.new(info)
-    end  
+    end
 
     def respond_to_missing?(method_name , include_private=false); client.respond_to?(method_name, include_private); end if RUBY_VERSION >= "1.9"
     def respond_to?(method_name, include_private=false); client.respond_to?(method_name, include_private) || super; end if RUBY_VERSION < "1.9"
