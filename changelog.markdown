@@ -1,4 +1,6 @@
 # Changelog
+### 1.0.1 January 22, 2013
+* Patch from @[mhfs][] for rbenv compatibility
 ### 1.0.0 January 9, 2013
 * Patch from @[Holler][] for using Topsy API keys
 ### 0.6.0 January 8, 2013
@@ -39,3 +41,4 @@
 * Initial version
 
 [Holler]: https://github.com/Holler
+[mhfs]: https://github.com/mhfs
